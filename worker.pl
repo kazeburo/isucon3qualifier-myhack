@@ -83,9 +83,9 @@ EOF
 warn $@ if $@;
     my $end_time = Time::HiRes::time();
     my $ela = $end_time - $start_time;
-    warn sprintf('elaplsed %s, [%s]', $ela, scalar localtime()) if $ela > 0.7;
+    warn sprintf('elaplsed %s, [%s]', $ela, scalar localtime()) if $ela > 0.6;
 
-    select undef,undef,undef,0.1;
+    select undef,undef,undef,0.3;
 }
 
 

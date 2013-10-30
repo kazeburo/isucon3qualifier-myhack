@@ -32,20 +32,26 @@ my $dbh = DBIx::Sunny->connect(
 );
 
 my $cache = Cache::Memcached::Fast->new({
-    servers => [ "localhost:12345" ],
+    servers => [ { address => "localhost:12345",noreply=>1} ],
+    serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
 });
 
 my $memos = $dbh->select_all(<<EOF);
     SELECT memos.id AS id,user, title, content, is_private, created_at, updated_at, username AS username
         FROM memos FORCE INDEX (PRIMARY)
     INNER JOIN users ON memos.user = users.id
-    WHERE is_private=0
     ORDER BY id DESC
 EOF
 
+my %users;
 for my $memo (@$memos) {
+    push @{$users{$memo->{user}}}, $memo->{id};
     $memo->{content_html} = markdown($memo->{content});
     $cache->set('memo:' . $memo->{id},$memo );
+}
+
+for my $user_id ( keys %users ) {
+    $cache->set('user_memos:'.$user_id, $users{$user_id});
 }
 
 

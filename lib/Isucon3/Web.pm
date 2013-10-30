@@ -14,6 +14,7 @@ use Encode;
 use Time::Piece;
 use Cookie::Baker;
 use Text::Markdown::Hoedown;
+use Data::MessagePack;
 
 sub load_config {
     my $self = shift;
@@ -30,7 +31,8 @@ sub memcache {
     my ($self) = @_;
     $self->{_memd} ||= do {
         Cache::Memcached::Fast->new({
-            servers => [ "localhost:12345" ],
+            servers => [ { address => "localhost:12345",noreply=>1} ],
+            serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
         });
     };
 }
@@ -288,7 +290,7 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     );
     my ($newer, $older);
     for my $i ( 0 .. scalar @$memos - 1 ) {
-        if ( $memos->[$i]->{id} eq $memo->{id} ) {
+        if ( $memos->[$i]->{id} == $memo->{id} ) {
             $older = $memos->[ $i - 1 ] if $i > 0;
             $newer = $memos->[ $i + 1 ] if $i < @$memos;
         }

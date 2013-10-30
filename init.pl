@@ -32,7 +32,7 @@ my $dbh = DBIx::Sunny->connect(
 );
 
 my $cache = Cache::Memcached::Fast->new({
-    servers => [ { address => "localhost:12345",noreply=>1} ],
+    servers => [ { address => "localhost:12345",noreply=>0} ],
     serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
 });
 
@@ -43,15 +43,17 @@ my $memos = $dbh->select_all(<<EOF);
     ORDER BY id DESC
 EOF
 
-my %users;
+my %users_all;
+my %users_public;
 for my $memo (@$memos) {
-    push @{$users{$memo->{user}}}, $memo->{id};
+    push @{$users_all{$memo->{user}}}, $memo->{id};
+    push @{$users_public{$memo->{user}}}, $memo->{id} unless $memo->{is_private};
     $memo->{content_html} = markdown($memo->{content});
     $cache->set('memo:' . $memo->{id},$memo );
 }
 
-for my $user_id ( keys %users ) {
-    $cache->set('user_memos:'.$user_id, $users{$user_id});
+my $users = $dbh->select_all('SELECT id FROM users ORDER BY id ASC');
+for my $user (@$users) {
+    my $memos = $dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', $user->{id});
+    $cache->set('user_memos:' . $user->{id}, [map {[$_->{id},$_->{is_private}]} @$memos]);
 }
-
-

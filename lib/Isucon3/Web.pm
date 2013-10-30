@@ -6,7 +6,7 @@ use utf8;
 use Kossy;
 use DBIx::Sunny;
 use JSON qw/ decode_json /;
-use Digest::SHA qw/ sha256_hex /;
+use Digest::SHA qw/ sha256_hex sha1_hex /;
 use DBIx::Sunny;
 use File::Temp qw/ tempfile /;
 use IO::Handle;
@@ -15,6 +15,8 @@ use Time::Piece;
 use Cookie::Baker;
 use Text::Markdown::Hoedown;
 use Data::MessagePack;
+use List::MoreUtils qw/firstidx/;
+
 
 sub load_config {
     my $self = shift;
@@ -185,11 +187,6 @@ post '/signup' => [qw(session anti_csrf)] => sub {
             httponly => 1,
             path => '/',
         }));
-        $c->req->env->{"psgix.session"}->{user} = {
-            username => $username,
-            id => $user_id,
-        };
-        $c->req->env->{"psgix.session"}->{user_id} = $user_id;
         $c->redirect('/mypage');
     }
 };
@@ -205,7 +202,7 @@ post '/signin' => [qw(session)] => sub {
     );
     if ( $user && $user->{password} eq sha256_hex($user->{salt} . $password) ) {
         $c->res->header('Set-Cookie',bake_cookie("isucon_session",{
-            value => "$user->{id},$user->{username},".sha256_hex(rand()),
+            value => "$user->{id},$user->{username},".sha1_hex(rand()),
             httponly => 1
         }));
         return $c->redirect('/mypage');
@@ -219,7 +216,7 @@ get '/mypage' => [qw(session get_user require_user)] => sub {
     my ($self, $c) = @_;
 
     my $memos = $self->dbh->select_all(
-        'SELECT id, title, is_private, created_at, updated_at FROM memos WHERE user=? ORDER BY id DESC',
+        'SELECT id, title, is_private, created_at, updated_at FROM memos FORCE INDEX (memos_mypage) WHERE user=? ORDER BY id DESC',
         $c->stash->{user}->{id},
     );
     $c->render('mypage.tx', { memos => $memos });
@@ -247,6 +244,9 @@ post '/memo' => [qw(session get_user require_user anti_csrf)] => sub {
         username => $c->stash->{user}->{id},
         created_at => sprintf('%04d-%02d-%02d %02d:%02d:%02d',$lt[5]+1900,$lt[4]+1,$lt[3],$lt[2],$lt[1],$lt[0]),
     });
+    my $memos = $self->dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', $c->stash->{user}->{id});
+    $self->memcache->set('user_memos:' . $c->stash->{user}->{id}, [map {[$_->{id},$_->{is_private}]} @$memos]);
+
     $c->redirect('/memo/' . $memo_id);
 };
 
@@ -274,26 +274,51 @@ get '/memo/:id' => [qw(session get_user)] => sub {
         }
     }
 
-    my $cond;
-    my $force_index = "FORCE INDEX (memos_mypage)";
-    if ($user && $user->{id} == $memo->{user}) {
-        $cond = "";
-    }
-    else {
-        $cond = "AND is_private=0";
-        $force_index = "FORCE INDEX (pager)"
-    }
-
-    my $memos = $self->dbh->select_all(
-        "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
-        $memo->{user},
-    );
     my ($newer, $older);
-    for my $i ( 0 .. scalar @$memos - 1 ) {
-        if ( $memos->[$i]->{id} == $memo->{id} ) {
-            $older = $memos->[ $i - 1 ] if $i > 0;
-            $newer = $memos->[ $i + 1 ] if $i < @$memos;
+    my $memos = $self->memcache->get('user_memos:' . $memo->{user});
+    if ( $memos ) {
+        my $i = firstidx { $_->[0] == $memo->{id}  } @$memos;
+        # privateのものもOKなので前後のid
+        if ($user && $user->{id} == $memo->{user}) {
+           $older = $memos->[ $i - 1 ][0] if $i > 0;
+           $newer = $memos->[ $i + 1 ][0] if $i < @$memos;
         }
+        # privateのものは除外する必要ある
+        else {
+           for (my $j = $i - 1; $j >= 0; $j--) {
+               if ($memos->[$j][1] == 0) {
+                   $older = $memos->[$j][0];
+               last;
+               }
+           }
+           for (my $j = $i + 1; $j < @$memos; $j++) {
+               if ($memos->[$j][1] == 0) {
+                   $newer = $memos->[$j][0];
+                   last;
+               }
+           }
+        }
+    } else {
+        my $cond;
+        my $force_index = "FORCE INDEX (memos_mypage)";
+        if ($user && $user->{id} == $memo->{user}) {
+            $cond = "";
+        }
+        else {
+           $cond = "AND is_private=0";
+           $force_index = "FORCE INDEX (pager)"
+       }
+       my $memos = $self->dbh->select_all(
+           "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
+           $memo->{user},
+       );
+       for my $i ( 0 .. scalar @$memos - 1 ) {
+           if ( $memos->[$i]->{id} eq $memo->{id} ) {
+               $older = $memos->[ $i - 1 ]->{id} if $i > 0;
+               $newer = $memos->[ $i + 1 ]->{id} if $i < @$memos;
+               last;
+           }
+       }
     }
 
     $c->render('memo.tx', {

@@ -13,6 +13,7 @@ use IO::Handle;
 use Encode;
 use Time::Piece;
 use Cookie::Baker;
+use Text::Markdown::Hoedown;
 
 sub load_config {
     my $self = shift;
@@ -25,15 +26,7 @@ sub load_config {
     };
 }
 
-sub markdown {
-    my $content = shift;
-    my ($fh, $filename) = tempfile();
-    $fh->print(encode_utf8($content));
-    $fh->close;
-    my $html = qx{ ../bin/markdown $filename };
-    unlink $filename;
-    return $html;
-}
+
 
 sub dbh {
     my ($self) = @_;
@@ -217,7 +210,7 @@ get '/mypage' => [qw(session get_user require_user)] => sub {
     my ($self, $c) = @_;
 
     my $memos = $self->dbh->select_all(
-        'SELECT id, content, is_private, created_at, updated_at FROM memos WHERE user=? ORDER BY id DESC',
+        'SELECT id, title, is_private, created_at, updated_at FROM memos WHERE user=? ORDER BY id DESC',
         $c->stash->{user}->{id},
     );
     $c->render('mypage.tx', { memos => $memos });
@@ -227,8 +220,9 @@ post '/memo' => [qw(session get_user require_user anti_csrf)] => sub {
     my ($self, $c) = @_;
 
     $self->dbh->query(
-        'INSERT INTO memos (user, content, is_private, created_at) VALUES (?, ?, ?, now())',
+        'INSERT INTO memos (user, title, content, is_private, created_at) VALUES (?, ?, ?, ?,  now())',
         $c->stash->{user}->{id},
+        (split /\r?\n/, $c->req->param('content'))[0],
         scalar $c->req->param('content'),
         scalar($c->req->param('is_private')) ? 1 : 0,
     );

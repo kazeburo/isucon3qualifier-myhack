@@ -39,7 +39,7 @@ while(1){
     my $start_time = Time::HiRes::time();
 eval{
     my $memos = $dbh->select_all(<<EOF);
-        SELECT memos.id AS id,user, content, is_private, created_at, updated_at, username AS username
+        SELECT memos.id AS id,user, title, is_private, created_at, updated_at, username AS username
         FROM memos FORCE INDEX (PRIMARY)
     INNER JOIN users ON memos.user = users.id
     WHERE is_private=0

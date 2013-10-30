@@ -34,6 +34,17 @@ my $tx = Text::Xslate->new(
     module => ['Text::Xslate::Bridge::TT2Like','Number::Format' => [':subs']],
 );
 
+{
+    my $html = $tx->render('signin.tx', {
+    });
+    my $filename = $root_dir . '/pages/signin';
+    my $tmpfilename = $filename .'.'. int(rand(100));
+    mkdir "$root_dir/pages";
+    open my $fh , '>', $tmpfilename;
+    print $fh $html;
+    close $fh;
+    move($tmpfilename, $filename);
+}
 
 while(1){
     my $start_time = Time::HiRes::time();

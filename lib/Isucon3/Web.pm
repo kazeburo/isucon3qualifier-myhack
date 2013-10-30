@@ -26,7 +26,14 @@ sub load_config {
     };
 }
 
-
+sub memcache {
+    my ($self) = @_;
+    $self->{_memd} ||= do {
+        Cache::Memcached::Fast->new({
+            servers => [ "localhost:12345" ],
+        });
+    };
+}
 
 sub dbh {
     my ($self) = @_;
@@ -226,7 +233,18 @@ post '/memo' => [qw(session get_user require_user anti_csrf)] => sub {
         scalar $c->req->param('content'),
         scalar($c->req->param('is_private')) ? 1 : 0,
     );
-    my $memo_id = $self->dbh->last_insert_id;
+   my $memo_id = $self->dbh->last_insert_id;
+    # markdownを生成してcacheに放り込む
+    my @lt = localtime();
+    $self->memcache->set('memo:' . $memo_id, {
+        content_html => markdown($c->req->param('content')),
+        content => $c->req->param('content'),
+        is_private => $c->req->param('is_private') ? 1: 0,
+        id => $memo_id,
+        user => $c->stash->{user}->{id},
+        username => $c->stash->{user}->{id},
+        created_at => sprintf('%04d-%02d-%02d %02d:%02d:%02d',$lt[5]+1900,$lt[4]+1,$lt[3],$lt[2],$lt[1],$lt[0]),
+    });
     $c->redirect('/memo/' . $memo_id);
 };
 
@@ -234,10 +252,17 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     my ($self, $c) = @_;
 
     my $user = $c->stash->{user};
-    my $memo = $self->dbh->select_row(
-        'SELECT memos.id as id , user, content, is_private, created_at, updated_at,username AS username FROM memos INNER JOIN users ON memos.user = users.id WHERE memos.id=?',
-        $c->args->{id},
-    );
+    my $memo = $self->memcache->get('memo:' . $c->args->{id}) || do {
+        my $memo = $self->dbh->select_row(
+            'SELECT memos.id as id , user, content, is_private, created_at, updated_at,username AS username FROM memos INNER JOIN users ON memos.user = users.id WHERE memos.id=?',
+            $c->args->{id},
+        );
+        if ($memo) {
+            $memo->{content_html} = markdown($memo->{content});
+            $self->memcache->set('memo:' . $c->args->{id},$memo);
+        }
+        $memo;
+    };
     unless ($memo) {
         $c->halt(404);
     }
@@ -246,7 +271,6 @@ get '/memo/:id' => [qw(session get_user)] => sub {
             $c->halt(404);
         }
     }
-    $memo->{content_html} = markdown($memo->{content});
 
     my $cond;
     my $force_index = "FORCE INDEX (memos_mypage)";

@@ -22,4 +22,3 @@ requires "Plack::Middleware::Session::Simple";
 requires "Proclet";
 requires "Text::Markdown::Hoedown";
 requires "Devel::NYTProf";
-

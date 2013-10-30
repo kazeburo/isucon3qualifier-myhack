@@ -235,7 +235,7 @@ get '/memo/:id' => [qw(session get_user)] => sub {
 
     my $user = $c->stash->{user};
     my $memo = $self->dbh->select_row(
-        'SELECT id, user, content, is_private, created_at, updated_at FROM memos WHERE id=?',
+        'SELECT memos.id as id , user, content, is_private, created_at, updated_at,username AS username FROM memos INNER JOIN users ON memos.user = users.id WHERE memos.id=?',
         $c->args->{id},
     );
     unless ($memo) {
@@ -247,21 +247,19 @@ get '/memo/:id' => [qw(session get_user)] => sub {
         }
     }
     $memo->{content_html} = markdown($memo->{content});
-    $memo->{username} = $self->dbh->select_one(
-        'SELECT username FROM users WHERE id=?',
-        $memo->{user},
-    );
 
     my $cond;
+    my $force_index = "FORCE INDEX (memos_mypage)";
     if ($user && $user->{id} == $memo->{user}) {
         $cond = "";
     }
     else {
         $cond = "AND is_private=0";
+        $force_index = "FORCE INDEX (pager)"
     }
 
     my $memos = $self->dbh->select_all(
-        "SELECT id FROM memos WHERE user=? $cond ORDER BY id",
+        "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
         $memo->{user},
     );
     my ($newer, $older);

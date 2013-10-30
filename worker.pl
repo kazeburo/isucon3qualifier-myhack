@@ -31,6 +31,7 @@ my $dbh = DBIx::Sunny->connect(
 my $tx = Text::Xslate->new(
     path => $root_dir . '/views_static',
     cache_dir => File::Temp::tempdir( CLEANUP => 1 ),
+    cache => 2,
     module => ['Text::Xslate::Bridge::TT2Like','Number::Format' => [':subs']],
 );
 
@@ -48,44 +49,43 @@ my $tx = Text::Xslate->new(
 
 while(1){
     my $start_time = Time::HiRes::time();
-eval{
-    my $memos = $dbh->select_all(<<EOF);
-        SELECT memos.id AS id,user, title, is_private, created_at, updated_at, username AS username
-        FROM memos FORCE INDEX (PRIMARY)
-    INNER JOIN users ON memos.user = users.id
-    WHERE is_private=0
-    ORDER BY id DESC
+    eval{
+        my $memos = $dbh->select_all(<<EOF);
+            SELECT memos.id AS id,user, title, is_private, created_at, updated_at, username AS username
+            FROM memos FORCE INDEX (PRIMARY)
+            INNER JOIN users ON memos.user = users.id
+            WHERE is_private=0
+            ORDER BY id DESC
 EOF
-    my $total = scalar @$memos;
-    my $page=0;
-    while ( my @memos = splice(@$memos,0,100) ) {
-        warn "aaaaaa" if !@memos;
-        my $html = $tx->render('index.tx', {
-            memos => \@memos,
-            page  => $page,
-            total => $total,
-        });
-        my $filename = $root_dir . '/pages/recent/'.$page;
-        my $tmpfilename = $filename .'.'. int(rand(100));
-        mkdir "$root_dir/pages";
-        mkdir "$root_dir/pages/recent";
-        open my $fh , '>', $tmpfilename;
-        print $fh $html;
-        close $fh;
-        move($tmpfilename, $filename);
-        if ( $page == 0 ) {
-           copy($filename,"$root_dir/pages/index.html.b");
-           move("$root_dir/pages/index.html.b","$root_dir/pages/index.html");
+        my $total = scalar @$memos;
+        my $page=0;
+        while ( my @memos = splice(@$memos,0,100) ) {
+            my $html = $tx->render('index.tx', {
+                memos => \@memos,
+                page  => $page,
+                total => $total,
+            });
+            my $filename = $root_dir . '/pages/recent/'.$page;
+            my $tmpfilename = $filename .'.'. int(rand(100));
+            mkdir "$root_dir/pages";
+            mkdir "$root_dir/pages/recent";
+            open my $fh , '>', $tmpfilename;
+            print $fh $html;
+            close $fh;
+            move($tmpfilename, $filename);
+            if ( $page == 0 ) {
+                copy($filename,"$root_dir/pages/index.html.b");
+                move("$root_dir/pages/index.html.b","$root_dir/pages/index.html");
+            }
+            $page++;
         }
-        $page++;
-    }
-};
-warn $@ if $@;
+    };
+    warn $@ if $@;
     my $end_time = Time::HiRes::time();
     my $ela = $end_time - $start_time;
     warn sprintf('elaplsed %s, [%s]', $ela, scalar localtime()) if $ela > 0.6;
 
-    select undef,undef,undef,0.3;
+    select undef,undef,undef,0.2;
 }
 
 

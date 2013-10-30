@@ -29,7 +29,7 @@ body {
 <li><a href="<: $c.req.uri_for('/mypage') :>">MyPage</a></li>
 <li>
   <form action="<: $c.req.uri_for('/signout') :>" method="post">
-    <input type="hidden" name="sid" value="<: $c.stash.session.token :>">
+    <input type="hidden" name="sid" value="<: $c.stash.token :>">
     <input type="submit" value="SignOut">
   </form>
 </li>

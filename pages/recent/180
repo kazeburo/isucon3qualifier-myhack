@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>Isucon3</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+body {
+  padding-top: 60px;
+}
+</style>
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/">Isucon3</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li><a href="/">Home</a></li>
+<!--# if expr="$isucon_username" -->
+<li><a href="/mypage">MyPage</a></li>
+<li>
+  <form action="/signout" method="post">
+    <input type="hidden" name="sid" value="<!--# echo var="isucon_token" -->">
+    <input type="submit" value="SignOut">
+  </form>
+</li>
+<!--# else -->
+<li><a href="/signin">SignIn</a></li>
+<!--# endif -->
+</ul>
+</div> <!--/.nav-collapse -->
+</div>
+</div>
+</div>
+
+<div class="container">
+<h2>Hello <!--# echo var="isucon_username" default="" -->!</h2>
+
+<h3>public memos</h3>
+<p id="pager">
+  recent 18001 - 18100 / total <span id="total">20540</span>
+</p>
+<ul id="memos">
+<li>
+  <a href="/memo/5096"># Glob</a> by isucon54 (2013-10-03 22:04:08)
+</li>
+<li>
+  <a href="/memo/5095">Evented I/O for V8 javascript. [![Build Status](https://secure.travis-ci.org/joyent/node.png)](http://travis-ci.org/joyent/node)</a> by isucon54 (2013-10-03 22:04:07)
+</li>
+<li>
+  <a href="/memo/5094">## read</a> by isucon54 (2013-10-03 22:04:06)
+</li>
+<li>
+  <a href="/memo/5092">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon54 (2013-10-03 22:04:04)
+</li>
+<li>
+  <a href="/memo/5090">npm-help-search(1) -- Search npm help documentation</a> by isucon54 (2013-10-03 22:04:02)
+</li>
+<li>
+  <a href="/memo/5089"># Abstract</a> by isucon54 (2013-10-03 22:04:01)
+</li>
+<li>
+  <a href="/memo/5088">npm-restart(1) -- Start a package</a> by isucon54 (2013-10-03 22:04:00)
+</li>
+<li>
+  <a href="/memo/5086">3.4.5 (2013-05-14)</a> by isucon54 (2013-10-03 22:03:58)
+</li>
+<li>
+  <a href="/memo/5083">npm-load(3) -- Load config settings</a> by isucon54 (2013-10-03 22:03:55)
+</li>
+<li>
+  <a href="/memo/5082"></a> by isucon54 (2013-10-03 22:03:54)
+</li>
+<li>
+  <a href="/memo/5080">npm-bundle(1) -- REMOVED</a> by isucon54 (2013-10-03 22:03:52)
+</li>
+<li>
+  <a href="/memo/5079">npm-rm(1) -- Remove a package</a> by isucon54 (2013-10-03 22:03:51)
+</li>
+<li>
+  <a href="/memo/5078">An ini format parser and serializer for node.</a> by isucon54 (2013-10-03 22:03:50)
+</li>
+<li>
+  <a href="/memo/5077">npm-install(3) -- install a package programmatically</a> by isucon54 (2013-10-03 22:03:49)
+</li>
+<li>
+  <a href="/memo/5076"># sntp</a> by isucon54 (2013-10-03 22:03:48)
+</li>
+<li>
+  <a href="/memo/5075"># mime</a> by isucon54 (2013-10-03 22:03:47)
+</li>
+<li>
+  <a href="/memo/5072">npm(3) -- node package manager</a> by isucon54 (2013-10-03 22:03:44)
+</li>
+<li>
+  <a href="/memo/5071"># block-stream</a> by isucon54 (2013-10-03 22:03:43)
+</li>
+<li>
+  <a href="/memo/5070"># node-uuid Benchmarks</a> by isucon54 (2013-10-03 22:03:42)
+</li>
+<li>
+  <a href="/memo/5069">npm-repo(3) -- Open package repository page in the browser</a> by isucon54 (2013-10-03 22:03:41)
+</li>
+<li>
+  <a href="/memo/5068">npm-scripts(7) -- How npm handles the &quot;scripts&quot; field</a> by isucon54 (2013-10-03 22:03:40)
+</li>
+<li>
+  <a href="/memo/5066"># sntp</a> by isucon54 (2013-10-03 22:03:38)
+</li>
+<li>
+  <a href="/memo/5062">npm-pack(3) -- Create a tarball from a package</a> by isucon54 (2013-10-03 22:03:34)
+</li>
+<li>
+  <a href="/memo/5061">semver(7) -- The semantic versioner for npm</a> by isucon54 (2013-10-03 22:03:33)
+</li>
+<li>
+  <a href="/memo/5060">cryptiles</a> by isucon54 (2013-10-03 22:03:32)
+</li>
+<li>
+  <a href="/memo/5059">npm-registry(7) -- The JavaScript Package Registry</a> by isucon54 (2013-10-03 22:03:31)
+</li>
+<li>
+  <a href="/memo/5057"># init-package-json</a> by isucon54 (2013-10-03 22:03:29)
+</li>
+<li>
+  <a href="/memo/5055">cookie-jar</a> by isucon54 (2013-10-03 22:03:27)
+</li>
+<li>
+  <a href="/memo/5049">Like `chmod -R`.</a> by isucon54 (2013-10-03 22:03:21)
+</li>
+<li>
+  <a href="/memo/5048">npm-restart(3) -- Start a package</a> by isucon54 (2013-10-03 22:03:20)
+</li>
+<li>
+  <a href="/memo/5047"></a> by isucon54 (2013-10-03 22:03:19)
+</li>
+<li>
+  <a href="/memo/5044"># fstream-ignore</a> by isucon54 (2013-10-03 22:03:16)
+</li>
+<li>
+  <a href="/memo/5043">semver(1) -- The semantic versioner for npm</a> by isucon54 (2013-10-03 22:03:15)
+</li>
+<li>
+  <a href="/memo/5042">cookie-jar</a> by isucon54 (2013-10-03 22:03:14)
+</li>
+<li>
+  <a href="/memo/5040">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon54 (2013-10-03 22:03:12)
+</li>
+<li>
+  <a href="/memo/5037">semver(1) -- The semantic versioner for npm</a> by isucon54 (2013-10-03 22:03:09)
+</li>
+<li>
+  <a href="/memo/5035">3.4.5 (2013-05-14)</a> by isucon54 (2013-10-03 22:03:07)
+</li>
+<li>
+  <a href="/memo/5034">npm-pack(3) -- Create a tarball from a package</a> by isucon54 (2013-10-03 22:03:06)
+</li>
+<li>
+  <a href="/memo/5033">oauth-sign</a> by isucon54 (2013-10-03 22:03:05)
+</li>
+<li>
+  <a href="/memo/5032"># delayed-stream</a> by isucon54 (2013-10-03 22:03:04)
+</li>
+<li>
+  <a href="/memo/5029"># osenv</a> by isucon54 (2013-10-03 22:03:01)
+</li>
+<li>
+  <a href="/memo/5024">npm-test(3) -- Test a package</a> by isucon54 (2013-10-03 22:02:56)
+</li>
+<li>
+  <a href="/memo/5018"># Bundler Issues</a> by isucon54 (2013-10-03 22:02:50)
+</li>
+<li>
+  <a href="/memo/5016"># node-uuid Benchmarks</a> by isucon54 (2013-10-03 22:02:48)
+</li>
+<li>
+  <a href="/memo/5015">If you want to write an option parser, and have it be good, there are</a> by isucon54 (2013-10-03 22:02:47)
+</li>
+<li>
+  <a href="/memo/5013"># osenv</a> by isucon54 (2013-10-03 22:02:45)
+</li>
+<li>
+  <a href="/memo/5008"># Bundler: a gem to bundle gems [![Build Status](https://secure.travis-ci.org/carlhuda/bundler.png?branch=1-3-stable)](http://travis-ci.org/carlhuda/bundler)</a> by isucon54 (2013-10-03 22:02:40)
+</li>
+<li>
+  <a href="/memo/5007"># cmd-shim</a> by isucon54 (2013-10-03 22:02:39)
+</li>
+<li>
+  <a href="/memo/4999">The &quot;which&quot; util from npm&#39;s guts.</a> by isucon53 (2013-10-03 22:02:31)
+</li>
+<li>
+  <a href="/memo/4997">Slop</a> by isucon53 (2013-10-03 22:02:29)
+</li>
+<li>
+  <a href="/memo/4996">npm-disputes(7) -- Handling Module Name Disputes</a> by isucon53 (2013-10-03 22:02:28)
+</li>
+<li>
+  <a href="/memo/4995">npm-restart(3) -- Start a package</a> by isucon52 (2013-10-03 22:02:27)
+</li>
+<li>
+  <a href="/memo/4990">npm-test(1) -- Test a package</a> by isucon52 (2013-10-03 22:02:22)
+</li>
+<li>
+  <a href="/memo/4989">npm-search(1) -- Search for packages</a> by isucon52 (2013-10-03 22:02:21)
+</li>
+<li>
+  <a href="/memo/4988">npm-help-search(1) -- Search npm help documentation</a> by isucon52 (2013-10-03 22:02:20)
+</li>
+<li>
+  <a href="/memo/4985"># Controlling Flow: callbacks are easy</a> by isucon52 (2013-10-03 22:02:17)
+</li>
+<li>
+  <a href="/memo/4984"># node-uuid</a> by isucon52 (2013-10-03 22:02:16)
+</li>
+<li>
+  <a href="/memo/4983">npm-help-search(3) -- Search the help pages</a> by isucon52 (2013-10-03 22:02:15)
+</li>
+<li>
+  <a href="/memo/4978">npm-run-script(3) -- Run arbitrary package scripts</a> by isucon52 (2013-10-03 22:02:10)
+</li>
+<li>
+  <a href="/memo/4977">An ini format parser and serializer for node.</a> by isucon52 (2013-10-03 22:02:09)
+</li>
+<li>
+  <a href="/memo/4973"># sntp</a> by isucon52 (2013-10-03 22:02:05)
+</li>
+<li>
+  <a href="/memo/4969">npm-build(1) -- Build a package</a> by isucon52 (2013-10-03 22:02:01)
+</li>
+<li>
+  <a href="/memo/4968">node-asn1 is a library for encoding and decoding ASN.1 datatypes in pure JS.</a> by isucon52 (2013-10-03 22:02:00)
+</li>
+<li>
+  <a href="/memo/4967"># combined-stream</a> by isucon52 (2013-10-03 22:01:59)
+</li>
+<li>
+  <a href="/memo/4966">## Terminal ##</a> by isucon52 (2013-10-03 22:01:58)
+</li>
+<li>
+  <a href="/memo/4965"># block-stream</a> by isucon52 (2013-10-03 22:01:57)
+</li>
+<li>
+  <a href="/memo/4963">npm-prune(1) -- Remove extraneous packages</a> by isucon52 (2013-10-03 22:01:55)
+</li>
+<li>
+  <a href="/memo/4960"># Async.js</a> by isucon52 (2013-10-03 22:01:52)
+</li>
+<li>
+  <a href="/memo/4959">npm-registry(7) -- The JavaScript Package Registry</a> by isucon52 (2013-10-03 22:01:51)
+</li>
+<li>
+  <a href="/memo/4958">npm-run-script(3) -- Run arbitrary package scripts</a> by isucon52 (2013-10-03 22:01:50)
+</li>
+<li>
+  <a href="/memo/4956"># once</a> by isucon52 (2013-10-03 22:01:48)
+</li>
+<li>
+  <a href="/memo/4955"># abbrev-js</a> by isucon52 (2013-10-03 22:01:47)
+</li>
+<li>
+  <a href="/memo/4952"># node-assert-plus</a> by isucon52 (2013-10-03 22:01:44)
+</li>
+<li>
+  <a href="/memo/4948">Copyright (c) 2010-2012 Robert Kieffer</a> by isucon52 (2013-10-03 22:01:40)
+</li>
+<li>
+  <a href="/memo/4947"># sigmund</a> by isucon52 (2013-10-03 22:01:39)
+</li>
+<li>
+  <a href="/memo/4946">npm-outdated(1) -- Check for outdated packages</a> by isucon52 (2013-10-03 22:01:38)
+</li>
+<li>
+  <a href="/memo/4944"># sigmund</a> by isucon52 (2013-10-03 22:01:36)
+</li>
+<li>
+  <a href="/memo/4940">A `rm -rf` for node.</a> by isucon52 (2013-10-03 22:01:32)
+</li>
+<li>
+  <a href="/memo/4939">If you want to write an option parser, and have it be good, there are</a> by isucon52 (2013-10-03 22:01:31)
+</li>
+<li>
+  <a href="/memo/4938"># sntp</a> by isucon52 (2013-10-03 22:01:30)
+</li>
+<li>
+  <a href="/memo/4937">mux</a> by isucon52 (2013-10-03 22:01:29)
+</li>
+<li>
+  <a href="/memo/4936">A `rm -rf` for node.</a> by isucon52 (2013-10-03 22:01:28)
+</li>
+<li>
+  <a href="/memo/4934">npm-dedupe(1) -- Reduce duplication</a> by isucon52 (2013-10-03 22:01:26)
+</li>
+<li>
+  <a href="/memo/4933"># abbrev-js</a> by isucon52 (2013-10-03 22:01:25)
+</li>
+<li>
+  <a href="/memo/4929"># Bundler Issues</a> by isucon52 (2013-10-03 22:01:21)
+</li>
+<li>
+  <a href="/memo/4927">npm-test(3) -- Test a package</a> by isucon52 (2013-10-03 22:01:19)
+</li>
+<li>
+  <a href="/memo/4926"># Glob</a> by isucon52 (2013-10-03 22:01:18)
+</li>
+<li>
+  <a href="/memo/4924">npm-config(7) -- More than you probably want to know about npm configuration</a> by isucon52 (2013-10-03 22:01:16)
+</li>
+<li>
+  <a href="/memo/4923">npm-bin(1) -- Display npm bin folder</a> by isucon52 (2013-10-03 22:01:15)
+</li>
+<li>
+  <a href="/memo/4921"># sha</a> by isucon52 (2013-10-03 22:01:13)
+</li>
+<li>
+  <a href="/memo/4920">mux</a> by isucon52 (2013-10-03 22:01:12)
+</li>
+<li>
+  <a href="/memo/4917"># node-querystring</a> by isucon52 (2013-10-03 22:01:09)
+</li>
+<li>
+  <a href="/memo/4914"># Creating Issues</a> by isucon52 (2013-10-03 22:01:06)
+</li>
+<li>
+  <a href="/memo/4910">Use this module to convert a username/groupname to a uid/gid number.</a> by isucon52 (2013-10-03 22:01:02)
+</li>
+<li>
+  <a href="/memo/4906">package.json(5) -- Specifics of npm&#39;s package.json handling</a> by isucon52 (2013-10-03 22:00:58)
+</li>
+<li>
+  <a href="/memo/4904">tunnel-agent</a> by isucon52 (2013-10-03 22:00:56)
+</li>
+<li>
+  <a href="/memo/4903">npm-help(1) -- Get help on npm</a> by isucon51 (2013-10-03 22:00:55)
+</li>
+<li>
+  <a href="/memo/4899">The &quot;which&quot; util from npm&#39;s guts.</a> by isucon51 (2013-10-03 22:00:51)
+</li>
+<li>
+  <a href="/memo/4898">npm-help(1) -- Get help on npm</a> by isucon51 (2013-10-03 22:00:50)
+</li>
+<li>
+  <a href="/memo/4897">oauth-sign</a> by isucon51 (2013-10-03 22:00:49)
+</li>
+</ul>
+
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

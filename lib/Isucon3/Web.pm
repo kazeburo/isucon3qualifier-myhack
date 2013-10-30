@@ -12,6 +12,7 @@ use File::Temp qw/ tempfile /;
 use IO::Handle;
 use Encode;
 use Time::Piece;
+use Cookie::Baker;
 
 sub load_config {
     my $self = shift;
@@ -54,9 +55,14 @@ filter 'session' => sub {
     my ($app) = @_;
     sub {
         my ($self, $c) = @_;
-        my $sid = $c->req->env->{"psgix.session.options"}->{id};
-        $c->stash->{session_id} = $sid;
-        $c->stash->{session}    = $c->req->env->{"psgix.session"};
+        my $cookie = crush_cookie($c->req->env->{'HTTP_COOKIE'})->{isucon_session} || '';
+        my @cookie = split /,/, $cookie;
+        $c->stash->{token} = $cookie[2] if $cookie;
+        $c->stash->{user} = {
+            id => $cookie[0],
+            username => $cookie[1] 
+        } if $cookie;
+        $c->stash->{root_uri} = $c->req->uri_for('/');
         $app->($self, $c);
     };
 };
@@ -65,14 +71,7 @@ filter 'get_user' => sub {
     my ($app) = @_;
     sub {
         my ($self, $c) = @_;
-
-        my $user_id = $c->req->env->{"psgix.session"}->{user_id};
-        my $user = $self->dbh->select_row(
-            'SELECT * FROM users WHERE id=?',
-            $user_id,
-        );
-        $c->stash->{user} = $user;
-        $c->res->header('Cache-Control', 'private') if $user;
+        $c->res->header('Cache-Control', 'private') if $c->stash->{user};
         $app->($self, $c);
     }
 };
@@ -93,7 +92,7 @@ filter 'anti_csrf' => sub {
     sub {
         my ($self, $c) = @_;
         my $sid   = $c->req->param('sid');
-        my $token = $c->req->env->{"psgix.session"}->{token};
+        my $token = $c->stash->{token};
         if ( $sid ne $token ) {
             return $c->halt(400);
         }
@@ -155,8 +154,7 @@ get '/signin' => [qw(session get_user)] => sub {
 
 post '/signout' => [qw(session get_user require_user anti_csrf)] => sub {
     my ($self, $c) = @_;
-    $c->req->env->{"psgix.session.options"}->{change_id} = 1;
-    delete $c->req->env->{"psgix.session"}->{user_id};
+    $c->res->header('Set-Cookie',bake_cookie("isucon_session",{value => "", expires => "now", path => "/", httponly => 1}));
     $c->redirect('/');
 };
 
@@ -180,6 +178,15 @@ post '/signup' => [qw(session anti_csrf)] => sub {
             $username, $password_hash, $salt,
         );
         my $user_id = $self->dbh->last_insert_id;
+        $c->res->header('Set-Cookie',bake_cookie("isucon_session",{
+            value => "$user_id,$username,".sha256_hex(rand()),
+            httponly => 1,
+            path => '/',
+        }));
+        $c->req->env->{"psgix.session"}->{user} = {
+            username => $username,
+            id => $user_id,
+        };
         $c->req->env->{"psgix.session"}->{user_id} = $user_id;
         $c->redirect('/mypage');
     }
@@ -195,14 +202,10 @@ post '/signin' => [qw(session)] => sub {
         $username,
     );
     if ( $user && $user->{password} eq sha256_hex($user->{salt} . $password) ) {
-        $c->req->env->{"psgix.session.options"}->{change_id} = 1;
-        my $session = $c->req->env->{"psgix.session"};
-        $session->{user_id} = $user->{id};
-        $session->{token}   = sha256_hex(rand());
-        $self->dbh->query(
-            'UPDATE users SET last_access=now() WHERE id=?',
-            $user->{id},
-        );
+        $c->res->header('Set-Cookie',bake_cookie("isucon_session",{
+            value => "$user->{id},$user->{username},".sha256_hex(rand()),
+            httponly => 1
+        }));
         return $c->redirect('/mypage');
     }
     else {
@@ -214,7 +217,7 @@ get '/mypage' => [qw(session get_user require_user)] => sub {
     my ($self, $c) = @_;
 
     my $memos = $self->dbh->select_all(
-        'SELECT id, content, is_private, created_at, updated_at FROM memos WHERE user=? ORDER BY created_at DESC',
+        'SELECT id, content, is_private, created_at, updated_at FROM memos WHERE user=? ORDER BY id DESC',
         $c->stash->{user}->{id},
     );
     $c->render('mypage.tx', { memos => $memos });
@@ -264,7 +267,7 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     }
 
     my $memos = $self->dbh->select_all(
-        "SELECT * FROM memos WHERE user=? $cond ORDER BY created_at",
+        "SELECT id FROM memos WHERE user=? $cond ORDER BY id",
         $memo->{user},
     );
     my ($newer, $older);

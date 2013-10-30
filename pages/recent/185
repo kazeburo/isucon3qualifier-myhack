@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>Isucon3</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+body {
+  padding-top: 60px;
+}
+</style>
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/">Isucon3</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li><a href="/">Home</a></li>
+<!--# if expr="$isucon_username" -->
+<li><a href="/mypage">MyPage</a></li>
+<li>
+  <form action="/signout" method="post">
+    <input type="hidden" name="sid" value="<!--# echo var="isucon_token" -->">
+    <input type="submit" value="SignOut">
+  </form>
+</li>
+<!--# else -->
+<li><a href="/signin">SignIn</a></li>
+<!--# endif -->
+</ul>
+</div> <!--/.nav-collapse -->
+</div>
+</div>
+</div>
+
+<div class="container">
+<h2>Hello <!--# echo var="isucon_username" default="" -->!</h2>
+
+<h3>public memos</h3>
+<p id="pager">
+  recent 18501 - 18600 / total <span id="total">20540</span>
+</p>
+<ul id="memos">
+<li>
+  <a href="/memo/4097">npm-build(1) -- Build a package</a> by isucon42 (2013-10-03 21:47:29)
+</li>
+<li>
+  <a href="/memo/4089"># node-uuid</a> by isucon42 (2013-10-03 21:47:21)
+</li>
+<li>
+  <a href="/memo/4088">## Bundler 0.9 to 1.0 and above</a> by isucon42 (2013-10-03 21:47:20)
+</li>
+<li>
+  <a href="/memo/4087"># block-stream</a> by isucon42 (2013-10-03 21:47:19)
+</li>
+<li>
+  <a href="/memo/4086">npm-update(1) -- Update a package</a> by isucon42 (2013-10-03 21:47:18)
+</li>
+<li>
+  <a href="/memo/4085">aws-sign</a> by isucon42 (2013-10-03 21:47:17)
+</li>
+<li>
+  <a href="/memo/4084"># minimatch</a> by isucon42 (2013-10-03 21:47:16)
+</li>
+<li>
+  <a href="/memo/4082">npm-tag(1) -- Tag a published version</a> by isucon42 (2013-10-03 21:47:14)
+</li>
+<li>
+  <a href="/memo/4081"># Creating Issues</a> by isucon42 (2013-10-03 21:47:13)
+</li>
+<li>
+  <a href="/memo/4079"># minimatch</a> by isucon42 (2013-10-03 21:47:11)
+</li>
+<li>
+  <a href="/memo/4077">npm-prefix(1) -- Display prefix</a> by isucon42 (2013-10-03 21:47:09)
+</li>
+<li>
+  <a href="/memo/4076">npm-stars(1) -- View packages marked as favorites</a> by isucon42 (2013-10-03 21:47:08)
+</li>
+<li>
+  <a href="/memo/4074"># npmlog</a> by isucon42 (2013-10-03 21:47:06)
+</li>
+<li>
+  <a href="/memo/4073">Browser-friendly inheritance fully compatible with standard node.js</a> by isucon42 (2013-10-03 21:47:05)
+</li>
+<li>
+  <a href="/memo/4072">Copyright (c) 2010-2012 Robert Kieffer</a> by isucon42 (2013-10-03 21:47:04)
+</li>
+<li>
+  <a href="/memo/4071">npm-uninstall(3) -- uninstall a package programmatically</a> by isucon42 (2013-10-03 21:47:03)
+</li>
+<li>
+  <a href="/memo/4067">npm-owner(3) -- Manage package owners</a> by isucon42 (2013-10-03 21:46:59)
+</li>
+<li>
+  <a href="/memo/4066"></a> by isucon42 (2013-10-03 21:46:58)
+</li>
+<li>
+  <a href="/memo/4065">npm-link(3) -- Symlink a package folder</a> by isucon42 (2013-10-03 21:46:57)
+</li>
+<li>
+  <a href="/memo/4063">Like FS streams, but with stat on them, and supporting directories and</a> by isucon42 (2013-10-03 21:46:55)
+</li>
+<li>
+  <a href="/memo/4060">npm-root(1) -- Display npm root</a> by isucon42 (2013-10-03 21:46:52)
+</li>
+<li>
+  <a href="/memo/4058">npm-shrinkwrap(3) -- programmatically generate package shrinkwrap file</a> by isucon42 (2013-10-03 21:46:50)
+</li>
+<li>
+  <a href="/memo/4057">npm(1) -- node package manager</a> by isucon42 (2013-10-03 21:46:49)
+</li>
+<li>
+  <a href="/memo/4055">Copyright (c) 2010-2012 Robert Kieffer</a> by isucon42 (2013-10-03 21:46:47)
+</li>
+<li>
+  <a href="/memo/4050">npm-prune(3) -- Remove extraneous packages</a> by isucon42 (2013-10-03 21:46:42)
+</li>
+<li>
+  <a href="/memo/4049">npmrc(5) -- The npm config files</a> by isucon42 (2013-10-03 21:46:41)
+</li>
+<li>
+  <a href="/memo/4048">npm-commands(3) -- npm commands</a> by isucon42 (2013-10-03 21:46:40)
+</li>
+<li>
+  <a href="/memo/4047"># retry</a> by isucon42 (2013-10-03 21:46:39)
+</li>
+<li>
+  <a href="/memo/4045">Browser-friendly inheritance fully compatible with standard node.js</a> by isucon42 (2013-10-03 21:46:37)
+</li>
+<li>
+  <a href="/memo/4044"># sntp</a> by isucon42 (2013-10-03 21:46:36)
+</li>
+<li>
+  <a href="/memo/4043">npm-stop(3) -- Stop a package</a> by isucon42 (2013-10-03 21:46:35)
+</li>
+<li>
+  <a href="/memo/4040"># mute-stream</a> by isucon42 (2013-10-03 21:46:32)
+</li>
+<li>
+  <a href="/memo/4039">npm-publish(1) -- Publish a package</a> by isucon42 (2013-10-03 21:46:31)
+</li>
+<li>
+  <a href="/memo/4034">cryptiles</a> by isucon42 (2013-10-03 21:46:26)
+</li>
+<li>
+  <a href="/memo/4031">Use this module to convert a username/groupname to a uid/gid number.</a> by isucon42 (2013-10-03 21:46:23)
+</li>
+<li>
+  <a href="/memo/4030">npm-init(1) -- Interactively create a package.json file</a> by isucon42 (2013-10-03 21:46:22)
+</li>
+<li>
+  <a href="/memo/4029">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon42 (2013-10-03 21:46:21)
+</li>
+<li>
+  <a href="/memo/4028">npm-config(3) -- Manage the npm configuration files</a> by isucon42 (2013-10-03 21:46:20)
+</li>
+<li>
+  <a href="/memo/4027"># mime</a> by isucon42 (2013-10-03 21:46:19)
+</li>
+<li>
+  <a href="/memo/4025">npm-load(3) -- Load config settings</a> by isucon42 (2013-10-03 21:46:17)
+</li>
+<li>
+  <a href="/memo/4023"># readable-stream</a> by isucon42 (2013-10-03 21:46:15)
+</li>
+<li>
+  <a href="/memo/4020">Like `chown -R`.</a> by isucon42 (2013-10-03 21:46:12)
+</li>
+<li>
+  <a href="/memo/4019">npm-repo(1) -- Open package repository page in the browser</a> by isucon42 (2013-10-03 21:46:11)
+</li>
+<li>
+  <a href="/memo/4017">Slop</a> by isucon42 (2013-10-03 21:46:09)
+</li>
+<li>
+  <a href="/memo/4011">npm(1) -- node package manager</a> by isucon42 (2013-10-03 21:46:03)
+</li>
+<li>
+  <a href="/memo/4010"># graceful-fs</a> by isucon42 (2013-10-03 21:46:02)
+</li>
+<li>
+  <a href="/memo/4009">3.4.5 (2013-05-14)</a> by isucon42 (2013-10-03 21:46:01)
+</li>
+<li>
+  <a href="/memo/4005"># readable-stream</a> by isucon42 (2013-10-03 21:45:57)
+</li>
+<li>
+  <a href="/memo/4004">npm-stop(3) -- Stop a package</a> by isucon42 (2013-10-03 21:45:56)
+</li>
+<li>
+  <a href="/memo/4001">npm-prefix(1) -- Display prefix</a> by isucon42 (2013-10-03 21:45:53)
+</li>
+<li>
+  <a href="/memo/4000"># minimatch</a> by isucon42 (2013-10-03 21:45:52)
+</li>
+<li>
+  <a href="/memo/3998">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon41 (2013-10-03 21:45:50)
+</li>
+<li>
+  <a href="/memo/3997"></a> by isucon41 (2013-10-03 21:45:49)
+</li>
+<li>
+  <a href="/memo/3996"># Form-Data [![Build Status](https://travis-ci.org/felixge/node-form-data.png?branch=master)](https://travis-ci.org/felixge/node-form-data) [![Dependency Status](https://gemnasium.com/felixge/node-form-data.png)](https://gemnasium.com/felixge/node-form-data)</a> by isucon41 (2013-10-03 21:45:48)
+</li>
+<li>
+  <a href="/memo/3994">npm-owner(1) -- Manage package owners</a> by isucon41 (2013-10-03 21:45:46)
+</li>
+<li>
+  <a href="/memo/3993">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon41 (2013-10-03 21:45:45)
+</li>
+<li>
+  <a href="/memo/3990">npm-link(1) -- Symlink a package folder</a> by isucon41 (2013-10-03 21:45:42)
+</li>
+<li>
+  <a href="/memo/3988"># Request -- Simplified HTTP client</a> by isucon41 (2013-10-03 21:45:40)
+</li>
+<li>
+  <a href="/memo/3987"># combined-stream</a> by isucon41 (2013-10-03 21:45:39)
+</li>
+<li>
+  <a href="/memo/3986"># read-package-json</a> by isucon41 (2013-10-03 21:45:38)
+</li>
+<li>
+  <a href="/memo/3984"># read-package-json</a> by isucon41 (2013-10-03 21:45:36)
+</li>
+<li>
+  <a href="/memo/3982">Great to have you here! Here are a few ways you can help out with [Bundler](http://github.com/carlhuda/bundler).</a> by isucon41 (2013-10-03 21:45:34)
+</li>
+<li>
+  <a href="/memo/3981">aws-sign</a> by isucon41 (2013-10-03 21:45:33)
+</li>
+<li>
+  <a href="/memo/3980"># lockfile</a> by isucon41 (2013-10-03 21:45:32)
+</li>
+<li>
+  <a href="/memo/3979">npm-edit(3) -- Edit an installed package</a> by isucon41 (2013-10-03 21:45:31)
+</li>
+<li>
+  <a href="/memo/3972">Use this module to convert a username/groupname to a uid/gid number.</a> by isucon41 (2013-10-03 21:45:24)
+</li>
+<li>
+  <a href="/memo/3967">forever-agent</a> by isucon41 (2013-10-03 21:45:19)
+</li>
+<li>
+  <a href="/memo/3965"># sigmund</a> by isucon41 (2013-10-03 21:45:17)
+</li>
+<li>
+  <a href="/memo/3964">[![Build Status](https://travis-ci.org/robertkowalski/npm-user-validate.png?branch=master)](https://travis-ci.org/robertkowalski/npm-user-validate)</a> by isucon41 (2013-10-03 21:45:16)
+</li>
+<li>
+  <a href="/memo/3962"># mime</a> by isucon41 (2013-10-03 21:45:14)
+</li>
+<li>
+  <a href="/memo/3960">npm-version(1) -- Bump a package version</a> by isucon41 (2013-10-03 21:45:12)
+</li>
+<li>
+  <a href="/memo/3958">forever-agent</a> by isucon41 (2013-10-03 21:45:10)
+</li>
+<li>
+  <a href="/memo/3953">Like `chmod -R`.</a> by isucon41 (2013-10-03 21:45:05)
+</li>
+<li>
+  <a href="/memo/3951"># Async.js</a> by isucon41 (2013-10-03 21:45:03)
+</li>
+<li>
+  <a href="/memo/3947">## Terminal ##</a> by isucon41 (2013-10-03 21:44:59)
+</li>
+<li>
+  <a href="/memo/3945">npm-init(1) -- Interactively create a package.json file</a> by isucon41 (2013-10-03 21:44:57)
+</li>
+<li>
+  <a href="/memo/3944">npm-install(1) -- Install a package</a> by isucon41 (2013-10-03 21:44:56)
+</li>
+<li>
+  <a href="/memo/3943">Customizing Pry</a> by isucon41 (2013-10-03 21:44:55)
+</li>
+<li>
+  <a href="/memo/3942">npm-help(1) -- Get help on npm</a> by isucon41 (2013-10-03 21:44:54)
+</li>
+<li>
+  <a href="/memo/3940"># normalize-package-data [![Build Status](https://travis-ci.org/meryn/normalize-package-data.png?branch=master)](https://travis-ci.org/meryn/normalize-package-data)</a> by isucon41 (2013-10-03 21:44:52)
+</li>
+<li>
+  <a href="/memo/3938">npm-deprecate(3) -- Deprecate a version of a package</a> by isucon41 (2013-10-03 21:44:50)
+</li>
+<li>
+  <a href="/memo/3936"># Abstract</a> by isucon41 (2013-10-03 21:44:48)
+</li>
+<li>
+  <a href="/memo/3935">npm-rm(1) -- Remove a package</a> by isucon41 (2013-10-03 21:44:47)
+</li>
+<li>
+  <a href="/memo/3933">cryptiles</a> by isucon41 (2013-10-03 21:44:45)
+</li>
+<li>
+  <a href="/memo/3932">npm-adduser(1) -- Add a registry user account</a> by isucon41 (2013-10-03 21:44:44)
+</li>
+<li>
+  <a href="/memo/3925">npm-install(1) -- Install a package</a> by isucon41 (2013-10-03 21:44:37)
+</li>
+<li>
+  <a href="/memo/3924"># Abstract</a> by isucon41 (2013-10-03 21:44:36)
+</li>
+<li>
+  <a href="/memo/3923"># node-http-signature</a> by isucon41 (2013-10-03 21:44:35)
+</li>
+<li>
+  <a href="/memo/3922">npm-view(3) -- View registry info</a> by isucon41 (2013-10-03 21:44:34)
+</li>
+<li>
+  <a href="/memo/3919">npm-view(3) -- View registry info</a> by isucon41 (2013-10-03 21:44:31)
+</li>
+<li>
+  <a href="/memo/3916">npm-install(3) -- install a package programmatically</a> by isucon41 (2013-10-03 21:44:28)
+</li>
+<li>
+  <a href="/memo/3915">npm-root(1) -- Display npm root</a> by isucon41 (2013-10-03 21:44:27)
+</li>
+<li>
+  <a href="/memo/3913">npm-init(1) -- Interactively create a package.json file</a> by isucon41 (2013-10-03 21:44:25)
+</li>
+<li>
+  <a href="/memo/3911">npm-test(1) -- Test a package</a> by isucon41 (2013-10-03 21:44:23)
+</li>
+<li>
+  <a href="/memo/3910">npm-search(3) -- Search for packages</a> by isucon41 (2013-10-03 21:44:22)
+</li>
+<li>
+  <a href="/memo/3909">npm-commands(3) -- npm commands</a> by isucon41 (2013-10-03 21:44:21)
+</li>
+<li>
+  <a href="/memo/3905">npm-shrinkwrap(3) -- programmatically generate package shrinkwrap file</a> by isucon41 (2013-10-03 21:44:17)
+</li>
+<li>
+  <a href="/memo/3902"># graceful-fs</a> by isucon41 (2013-10-03 21:44:14)
+</li>
+<li>
+  <a href="/memo/3901"># lru cache</a> by isucon41 (2013-10-03 21:44:13)
+</li>
+<li>
+  <a href="/memo/3898"># sntp</a> by isucon41 (2013-10-03 21:44:10)
+</li>
+</ul>
+
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

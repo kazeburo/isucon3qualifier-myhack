@@ -2,7 +2,7 @@
 : around content -> {
 
 <form action="<: $c.req.uri_for('/memo') :>" method="post">
-  <input type="hidden" name="sid" value="<: $c.stash.session.token :>">
+  <input type="hidden" name="sid" value="<: $c.stash.token :>">
   <textarea name="content"></textarea>
   <br>
   <input type="checkbox" name="is_private" value="1"> private

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>Isucon3</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+body {
+  padding-top: 60px;
+}
+</style>
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/">Isucon3</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li><a href="/">Home</a></li>
+<!--# if expr="$isucon_username" -->
+<li><a href="/mypage">MyPage</a></li>
+<li>
+  <form action="/signout" method="post">
+    <input type="hidden" name="sid" value="<!--# echo var="isucon_token" -->">
+    <input type="submit" value="SignOut">
+  </form>
+</li>
+<!--# else -->
+<li><a href="/signin">SignIn</a></li>
+<!--# endif -->
+</ul>
+</div> <!--/.nav-collapse -->
+</div>
+</div>
+</div>
+
+<div class="container">
+<h2>Hello <!--# echo var="isucon_username" default="" -->!</h2>
+
+<h3>public memos</h3>
+<p id="pager">
+  recent 8801 - 8900 / total <span id="total">20540</span>
+</p>
+<ul id="memos">
+<li>
+  <a href="/memo/23733">npm-run-script(3) -- Run arbitrary package scripts</a> by isucon236 (2013-10-04 03:14:45)
+</li>
+<li>
+  <a href="/memo/23732"># Form-Data [![Build Status](https://travis-ci.org/felixge/node-form-data.png?branch=master)](https://travis-ci.org/felixge/node-form-data) [![Dependency Status](https://gemnasium.com/felixge/node-form-data.png)](https://gemnasium.com/felixge/node-form-data)</a> by isucon236 (2013-10-04 03:14:44)
+</li>
+<li>
+  <a href="/memo/23731">npm-submodule(3) -- Add a package as a git submodule</a> by isucon236 (2013-10-04 03:14:43)
+</li>
+<li>
+  <a href="/memo/23730">oauth-sign</a> by isucon236 (2013-10-04 03:14:42)
+</li>
+<li>
+  <a href="/memo/23728">The &quot;which&quot; util from npm&#39;s guts.</a> by isucon236 (2013-10-04 03:14:40)
+</li>
+<li>
+  <a href="/memo/23725">forever-agent</a> by isucon236 (2013-10-04 03:14:37)
+</li>
+<li>
+  <a href="/memo/23724"># Abstract</a> by isucon235 (2013-10-04 03:14:36)
+</li>
+<li>
+  <a href="/memo/23723">npm-update(3) -- Update a package</a> by isucon235 (2013-10-04 03:14:35)
+</li>
+<li>
+  <a href="/memo/23722"># It Opens Stuff</a> by isucon235 (2013-10-04 03:14:34)
+</li>
+<li>
+  <a href="/memo/23721">npm-init(1) -- Interactively create a package.json file</a> by isucon235 (2013-10-04 03:14:33)
+</li>
+<li>
+  <a href="/memo/23720">## Bundler 0.9 to 1.0 and above</a> by isucon235 (2013-10-04 03:14:32)
+</li>
+<li>
+  <a href="/memo/23719"># node-http-signature</a> by isucon235 (2013-10-04 03:14:31)
+</li>
+<li>
+  <a href="/memo/23717">## About</a> by isucon235 (2013-10-04 03:14:29)
+</li>
+<li>
+  <a href="/memo/23713"># json-stringify-safe</a> by isucon235 (2013-10-04 03:14:25)
+</li>
+<li>
+  <a href="/memo/23711"># node-uuid Benchmarks</a> by isucon235 (2013-10-04 03:14:23)
+</li>
+<li>
+  <a href="/memo/23707">If you want to write an option parser, and have it be good, there are</a> by isucon235 (2013-10-04 03:14:19)
+</li>
+<li>
+  <a href="/memo/23706"># delayed-stream</a> by isucon235 (2013-10-04 03:14:18)
+</li>
+<li>
+  <a href="/memo/23705">npm-submodule(3) -- Add a package as a git submodule</a> by isucon235 (2013-10-04 03:14:17)
+</li>
+<li>
+  <a href="/memo/23704">npm-explore(1) -- Browse an installed package</a> by isucon235 (2013-10-04 03:14:16)
+</li>
+<li>
+  <a href="/memo/23703"># block-stream</a> by isucon235 (2013-10-04 03:14:15)
+</li>
+<li>
+  <a href="/memo/23699"># sha</a> by isucon235 (2013-10-04 03:14:11)
+</li>
+<li>
+  <a href="/memo/23697">Portions copyright (c) 2010 Andre Arko</a> by isucon235 (2013-10-04 03:14:09)
+</li>
+<li>
+  <a href="/memo/23696"># lru cache</a> by isucon235 (2013-10-04 03:14:08)
+</li>
+<li>
+  <a href="/memo/23694">Like `chown -R`.</a> by isucon235 (2013-10-04 03:14:06)
+</li>
+<li>
+  <a href="/memo/23693">npm-deprecate(3) -- Deprecate a version of a package</a> by isucon235 (2013-10-04 03:14:05)
+</li>
+<li>
+  <a href="/memo/23687">npm-run-script(1) -- Run arbitrary package scripts</a> by isucon235 (2013-10-04 03:13:59)
+</li>
+<li>
+  <a href="/memo/23685">npm-run-script(3) -- Run arbitrary package scripts</a> by isucon235 (2013-10-04 03:13:57)
+</li>
+<li>
+  <a href="/memo/23682"># json-stringify-safe</a> by isucon235 (2013-10-04 03:13:54)
+</li>
+<li>
+  <a href="/memo/23681"># mute-stream</a> by isucon235 (2013-10-04 03:13:53)
+</li>
+<li>
+  <a href="/memo/23680">## About</a> by isucon235 (2013-10-04 03:13:52)
+</li>
+<li>
+  <a href="/memo/23678">semver(7) -- The semantic versioner for npm</a> by isucon235 (2013-10-04 03:13:50)
+</li>
+<li>
+  <a href="/memo/23677"># normalize-package-data [![Build Status](https://travis-ci.org/meryn/normalize-package-data.png?branch=master)](https://travis-ci.org/meryn/normalize-package-data)</a> by isucon235 (2013-10-04 03:13:49)
+</li>
+<li>
+  <a href="/memo/23676">A list of objects, bound by their prototype chain.</a> by isucon235 (2013-10-04 03:13:48)
+</li>
+<li>
+  <a href="/memo/23675">npm-commands(3) -- npm commands</a> by isucon235 (2013-10-04 03:13:47)
+</li>
+<li>
+  <a href="/memo/23674"># It Opens Stuff</a> by isucon235 (2013-10-04 03:13:46)
+</li>
+<li>
+  <a href="/memo/23673"># combined-stream</a> by isucon235 (2013-10-04 03:13:45)
+</li>
+<li>
+  <a href="/memo/23672">Great to have you here! Here are a few ways you can help out with [Bundler](http://github.com/carlhuda/bundler).</a> by isucon235 (2013-10-04 03:13:44)
+</li>
+<li>
+  <a href="/memo/23671"># lockfile</a> by isucon235 (2013-10-04 03:13:43)
+</li>
+<li>
+  <a href="/memo/23669"># node-uuid Benchmarks</a> by isucon235 (2013-10-04 03:13:41)
+</li>
+<li>
+  <a href="/memo/23662">node-gyp</a> by isucon235 (2013-10-04 03:13:34)
+</li>
+<li>
+  <a href="/memo/23661"># lockfile</a> by isucon235 (2013-10-04 03:13:33)
+</li>
+<li>
+  <a href="/memo/23660">npmrc(5) -- The npm config files</a> by isucon235 (2013-10-04 03:13:32)
+</li>
+<li>
+  <a href="/memo/23658"># Glob</a> by isucon234 (2013-10-04 03:13:30)
+</li>
+<li>
+  <a href="/memo/23657">## About</a> by isucon234 (2013-10-04 03:13:29)
+</li>
+<li>
+  <a href="/memo/23655">If you want to write an option parser, and have it be good, there are</a> by isucon234 (2013-10-04 03:13:27)
+</li>
+<li>
+  <a href="/memo/23654">npm-docs(3) -- Docs for a package in a web browser maybe</a> by isucon234 (2013-10-04 03:13:26)
+</li>
+<li>
+  <a href="/memo/23650"></a> by isucon234 (2013-10-04 03:13:22)
+</li>
+<li>
+  <a href="/memo/23647">oauth-sign</a> by isucon234 (2013-10-04 03:13:19)
+</li>
+<li>
+  <a href="/memo/23646">npm-install(3) -- install a package programmatically</a> by isucon234 (2013-10-04 03:13:18)
+</li>
+<li>
+  <a href="/memo/23644">node-gyp</a> by isucon234 (2013-10-04 03:13:16)
+</li>
+<li>
+  <a href="/memo/23641">npm-view(1) -- View registry info</a> by isucon234 (2013-10-04 03:13:13)
+</li>
+<li>
+  <a href="/memo/23640">If you want to write an option parser, and have it be good, there are</a> by isucon234 (2013-10-04 03:13:12)
+</li>
+<li>
+  <a href="/memo/23639">npm-init(1) -- Interactively create a package.json file</a> by isucon234 (2013-10-04 03:13:11)
+</li>
+<li>
+  <a href="/memo/23637"># Glob</a> by isucon234 (2013-10-04 03:13:09)
+</li>
+<li>
+  <a href="/memo/23635">npm-help(1) -- Get help on npm</a> by isucon234 (2013-10-04 03:13:07)
+</li>
+<li>
+  <a href="/memo/23634">npm-explore(3) -- Browse an installed package</a> by isucon234 (2013-10-04 03:13:06)
+</li>
+<li>
+  <a href="/memo/23633">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon234 (2013-10-04 03:13:05)
+</li>
+<li>
+  <a href="/memo/23632">npm-docs(1) -- Docs for a package in a web browser maybe</a> by isucon234 (2013-10-04 03:13:04)
+</li>
+<li>
+  <a href="/memo/23630">npm-cache(1) -- Manipulates packages cache</a> by isucon234 (2013-10-04 03:13:02)
+</li>
+<li>
+  <a href="/memo/23629">npm-config(1) -- Manage the npm configuration files</a> by isucon234 (2013-10-04 03:13:01)
+</li>
+<li>
+  <a href="/memo/23628"># Abstract</a> by isucon234 (2013-10-04 03:13:00)
+</li>
+<li>
+  <a href="/memo/23627"># npmlog</a> by isucon234 (2013-10-04 03:12:59)
+</li>
+<li>
+  <a href="/memo/23624"># combined-stream</a> by isucon234 (2013-10-04 03:12:56)
+</li>
+<li>
+  <a href="/memo/23619">Like FS streams, but with stat on them, and supporting directories and</a> by isucon234 (2013-10-04 03:12:51)
+</li>
+<li>
+  <a href="/memo/23618"># npmlog</a> by isucon234 (2013-10-04 03:12:50)
+</li>
+<li>
+  <a href="/memo/23616"># sigmund</a> by isucon234 (2013-10-04 03:12:48)
+</li>
+<li>
+  <a href="/memo/23614">## read</a> by isucon234 (2013-10-04 03:12:46)
+</li>
+<li>
+  <a href="/memo/23613">npm-shrinkwrap(3) -- programmatically generate package shrinkwrap file</a> by isucon234 (2013-10-04 03:12:45)
+</li>
+<li>
+  <a href="/memo/23611"># fstream-ignore</a> by isucon234 (2013-10-04 03:12:43)
+</li>
+<li>
+  <a href="/memo/23609">npm-link(3) -- Symlink a package folder</a> by isucon234 (2013-10-04 03:12:41)
+</li>
+<li>
+  <a href="/memo/23603">npm-update(1) -- Update a package</a> by isucon234 (2013-10-04 03:12:35)
+</li>
+<li>
+  <a href="/memo/23602"></a> by isucon234 (2013-10-04 03:12:34)
+</li>
+<li>
+  <a href="/memo/23601">node-gyp</a> by isucon234 (2013-10-04 03:12:33)
+</li>
+<li>
+  <a href="/memo/23598">npm-bugs(1) -- Bugs for a package in a web browser maybe</a> by isucon234 (2013-10-04 03:12:30)
+</li>
+<li>
+  <a href="/memo/23597">Portions copyright (c) 2010 Andre Arko</a> by isucon234 (2013-10-04 03:12:29)
+</li>
+<li>
+  <a href="/memo/23596">npm-run-script(3) -- Run arbitrary package scripts</a> by isucon234 (2013-10-04 03:12:28)
+</li>
+<li>
+  <a href="/memo/23595">semver(1) -- The semantic versioner for npm</a> by isucon234 (2013-10-04 03:12:27)
+</li>
+<li>
+  <a href="/memo/23594">npm-update(1) -- Update a package</a> by isucon234 (2013-10-04 03:12:26)
+</li>
+<li>
+  <a href="/memo/23593"># once</a> by isucon234 (2013-10-04 03:12:25)
+</li>
+<li>
+  <a href="/memo/23591">npm init(3) -- Interactively create a package.json file</a> by isucon234 (2013-10-04 03:12:23)
+</li>
+<li>
+  <a href="/memo/23589"># readable-stream</a> by isucon234 (2013-10-04 03:12:21)
+</li>
+<li>
+  <a href="/memo/23585">semver(1) -- The semantic versioner for npm</a> by isucon234 (2013-10-04 03:12:17)
+</li>
+<li>
+  <a href="/memo/23584">npm-root(3) -- Display npm root</a> by isucon234 (2013-10-04 03:12:16)
+</li>
+<li>
+  <a href="/memo/23583"># combined-stream</a> by isucon234 (2013-10-04 03:12:15)
+</li>
+<li>
+  <a href="/memo/23582"># npmlog</a> by isucon234 (2013-10-04 03:12:14)
+</li>
+<li>
+  <a href="/memo/23581">npm-tag(1) -- Tag a published version</a> by isucon234 (2013-10-04 03:12:13)
+</li>
+<li>
+  <a href="/memo/23578"># node-assert-plus</a> by isucon234 (2013-10-04 03:12:10)
+</li>
+<li>
+  <a href="/memo/23574">npm-start(1) -- Start a package</a> by isucon234 (2013-10-04 03:12:06)
+</li>
+<li>
+  <a href="/memo/23573"># Glob</a> by isucon234 (2013-10-04 03:12:05)
+</li>
+<li>
+  <a href="/memo/23571">npm-disputes(7) -- Handling Module Name Disputes</a> by isucon234 (2013-10-04 03:12:03)
+</li>
+<li>
+  <a href="/memo/23570">npm-prune(3) -- Remove extraneous packages</a> by isucon234 (2013-10-04 03:12:02)
+</li>
+<li>
+  <a href="/memo/23566">npm-version(3) -- Bump a package version</a> by isucon234 (2013-10-04 03:11:58)
+</li>
+<li>
+  <a href="/memo/23563">oauth-sign</a> by isucon234 (2013-10-04 03:11:55)
+</li>
+<li>
+  <a href="/memo/23562"># sigmund</a> by isucon234 (2013-10-04 03:11:54)
+</li>
+<li>
+  <a href="/memo/23561"># Glob</a> by isucon234 (2013-10-04 03:11:53)
+</li>
+<li>
+  <a href="/memo/23559"># json-stringify-safe</a> by isucon234 (2013-10-04 03:11:51)
+</li>
+<li>
+  <a href="/memo/23555">npm-link(1) -- Symlink a package folder</a> by isucon234 (2013-10-04 03:11:47)
+</li>
+<li>
+  <a href="/memo/23554">npm-start(3) -- Start a package</a> by isucon234 (2013-10-04 03:11:46)
+</li>
+<li>
+  <a href="/memo/23551">npm(3) -- node package manager</a> by isucon233 (2013-10-04 03:11:43)
+</li>
+<li>
+  <a href="/memo/23548">npm-docs(3) -- Docs for a package in a web browser maybe</a> by isucon233 (2013-10-04 03:11:40)
+</li>
+</ul>
+
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

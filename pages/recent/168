@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>Isucon3</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+body {
+  padding-top: 60px;
+}
+</style>
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/">Isucon3</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li><a href="/">Home</a></li>
+<!--# if expr="$isucon_username" -->
+<li><a href="/mypage">MyPage</a></li>
+<li>
+  <form action="/signout" method="post">
+    <input type="hidden" name="sid" value="<!--# echo var="isucon_token" -->">
+    <input type="submit" value="SignOut">
+  </form>
+</li>
+<!--# else -->
+<li><a href="/signin">SignIn</a></li>
+<!--# endif -->
+</ul>
+</div> <!--/.nav-collapse -->
+</div>
+</div>
+</div>
+
+<div class="container">
+<h2>Hello <!--# echo var="isucon_username" default="" -->!</h2>
+
+<h3>public memos</h3>
+<p id="pager">
+  recent 16801 - 16900 / total <span id="total">20540</span>
+</p>
+<ul id="memos">
+<li>
+  <a href="/memo/7507">npm-developers(7) -- Developer Guide</a> by isucon76 (2013-10-03 22:44:19)
+</li>
+<li>
+  <a href="/memo/7506">npm-ls(3) -- List installed packages</a> by isucon76 (2013-10-03 22:44:18)
+</li>
+<li>
+  <a href="/memo/7505"># osenv</a> by isucon76 (2013-10-03 22:44:17)
+</li>
+<li>
+  <a href="/memo/7504">npm-edit(3) -- Edit an installed package</a> by isucon76 (2013-10-03 22:44:16)
+</li>
+<li>
+  <a href="/memo/7503"># Go-MySQL-Driver</a> by isucon76 (2013-10-03 22:44:15)
+</li>
+<li>
+  <a href="/memo/7499">npm-rebuild(3) -- Rebuild a package</a> by isucon76 (2013-10-03 22:44:11)
+</li>
+<li>
+  <a href="/memo/7498">An ini format parser and serializer for node.</a> by isucon76 (2013-10-03 22:44:10)
+</li>
+<li>
+  <a href="/memo/7497">If you want to write an option parser, and have it be good, there are</a> by isucon76 (2013-10-03 22:44:09)
+</li>
+<li>
+  <a href="/memo/7496">npm-init(1) -- Interactively create a package.json file</a> by isucon76 (2013-10-03 22:44:08)
+</li>
+<li>
+  <a href="/memo/7495">package.json(5) -- Specifics of npm&#39;s package.json handling</a> by isucon76 (2013-10-03 22:44:07)
+</li>
+<li>
+  <a href="/memo/7494">npm-rebuild(1) -- Rebuild a package</a> by isucon76 (2013-10-03 22:44:06)
+</li>
+<li>
+  <a href="/memo/7493">npm-dedupe(1) -- Reduce duplication</a> by isucon76 (2013-10-03 22:44:05)
+</li>
+<li>
+  <a href="/memo/7489">npm-install(3) -- install a package programmatically</a> by isucon76 (2013-10-03 22:44:01)
+</li>
+<li>
+  <a href="/memo/7488">npm-search(1) -- Search for packages</a> by isucon76 (2013-10-03 22:44:00)
+</li>
+<li>
+  <a href="/memo/7486">npm-deprecate(1) -- Deprecate a version of a package</a> by isucon76 (2013-10-03 22:43:58)
+</li>
+<li>
+  <a href="/memo/7484">tunnel-agent</a> by isucon76 (2013-10-03 22:43:56)
+</li>
+<li>
+  <a href="/memo/7483">npm-load(3) -- Load config settings</a> by isucon76 (2013-10-03 22:43:55)
+</li>
+<li>
+  <a href="/memo/7481">npm-whoami(3) -- Display npm username</a> by isucon76 (2013-10-03 22:43:53)
+</li>
+<li>
+  <a href="/memo/7479">npm-outdated(1) -- Check for outdated packages</a> by isucon76 (2013-10-03 22:43:51)
+</li>
+<li>
+  <a href="/memo/7477">npm-bugs(1) -- Bugs for a package in a web browser maybe</a> by isucon76 (2013-10-03 22:43:49)
+</li>
+<li>
+  <a href="/memo/7476">aws-sign</a> by isucon76 (2013-10-03 22:43:48)
+</li>
+<li>
+  <a href="/memo/7474">node-gyp</a> by isucon76 (2013-10-03 22:43:46)
+</li>
+<li>
+  <a href="/memo/7473"># npm-registry-client</a> by isucon76 (2013-10-03 22:43:45)
+</li>
+<li>
+  <a href="/memo/7472">npm-root(1) -- Display npm root</a> by isucon76 (2013-10-03 22:43:44)
+</li>
+<li>
+  <a href="/memo/7471">Further documentation on Pry can be found here:</a> by isucon76 (2013-10-03 22:43:43)
+</li>
+<li>
+  <a href="/memo/7470"># npmlog</a> by isucon76 (2013-10-03 22:43:42)
+</li>
+<li>
+  <a href="/memo/7467">The &quot;which&quot; util from npm&#39;s guts.</a> by isucon76 (2013-10-03 22:43:39)
+</li>
+<li>
+  <a href="/memo/7466">npm-outdated(3) -- Check for outdated packages</a> by isucon76 (2013-10-03 22:43:38)
+</li>
+<li>
+  <a href="/memo/7462">npm-restart(3) -- Start a package</a> by isucon76 (2013-10-03 22:43:34)
+</li>
+<li>
+  <a href="/memo/7457"># node-uuid Benchmarks</a> by isucon76 (2013-10-03 22:43:29)
+</li>
+<li>
+  <a href="/memo/7456">package.json(5) -- Specifics of npm&#39;s package.json handling</a> by isucon76 (2013-10-03 22:43:28)
+</li>
+<li>
+  <a href="/memo/7453">npm init(3) -- Interactively create a package.json file</a> by isucon76 (2013-10-03 22:43:25)
+</li>
+<li>
+  <a href="/memo/7452">npm init(3) -- Interactively create a package.json file</a> by isucon76 (2013-10-03 22:43:24)
+</li>
+<li>
+  <a href="/memo/7446"># node-uuid</a> by isucon76 (2013-10-03 22:43:18)
+</li>
+<li>
+  <a href="/memo/7445">npm-start(3) -- Start a package</a> by isucon76 (2013-10-03 22:43:17)
+</li>
+<li>
+  <a href="/memo/7444"># node-querystring</a> by isucon76 (2013-10-03 22:43:16)
+</li>
+<li>
+  <a href="/memo/7439">Copyright (c) 2010-2012 Robert Kieffer</a> by isucon76 (2013-10-03 22:43:11)
+</li>
+<li>
+  <a href="/memo/7435">node-gyp</a> by isucon76 (2013-10-03 22:43:07)
+</li>
+<li>
+  <a href="/memo/7433"># minimatch</a> by isucon76 (2013-10-03 22:43:05)
+</li>
+<li>
+  <a href="/memo/7432">package.json(5) -- Specifics of npm&#39;s package.json handling</a> by isucon76 (2013-10-03 22:43:04)
+</li>
+<li>
+  <a href="/memo/7425">npm-help(1) -- Get help on npm</a> by isucon76 (2013-10-03 22:42:57)
+</li>
+<li>
+  <a href="/memo/7424"># node-assert-plus</a> by isucon76 (2013-10-03 22:42:56)
+</li>
+<li>
+  <a href="/memo/7423">aws-sign</a> by isucon76 (2013-10-03 22:42:55)
+</li>
+<li>
+  <a href="/memo/7422">npm-help-search(1) -- Search npm help documentation</a> by isucon76 (2013-10-03 22:42:54)
+</li>
+<li>
+  <a href="/memo/7418">npm-submodule(1) -- Add a package as a git submodule</a> by isucon76 (2013-10-03 22:42:50)
+</li>
+<li>
+  <a href="/memo/7415">## 1.3.5 (3 April 2013)</a> by isucon76 (2013-10-03 22:42:47)
+</li>
+<li>
+  <a href="/memo/7413">tunnel-agent</a> by isucon76 (2013-10-03 22:42:45)
+</li>
+<li>
+  <a href="/memo/7411"></a> by isucon76 (2013-10-03 22:42:43)
+</li>
+<li>
+  <a href="/memo/7409">npm-restart(3) -- Start a package</a> by isucon76 (2013-10-03 22:42:41)
+</li>
+<li>
+  <a href="/memo/7408">npm-shrinkwrap(3) -- programmatically generate package shrinkwrap file</a> by isucon76 (2013-10-03 22:42:40)
+</li>
+<li>
+  <a href="/memo/7406">A `rm -rf` for node.</a> by isucon76 (2013-10-03 22:42:38)
+</li>
+<li>
+  <a href="/memo/7404"># npmconf</a> by isucon76 (2013-10-03 22:42:36)
+</li>
+<li>
+  <a href="/memo/7403">If you want to write an option parser, and have it be good, there are</a> by isucon76 (2013-10-03 22:42:35)
+</li>
+<li>
+  <a href="/memo/7402">ansi.js</a> by isucon76 (2013-10-03 22:42:34)
+</li>
+<li>
+  <a href="/memo/7399"># osenv</a> by isucon76 (2013-10-03 22:42:31)
+</li>
+<li>
+  <a href="/memo/7398"># abbrev-js</a> by isucon76 (2013-10-03 22:42:30)
+</li>
+<li>
+  <a href="/memo/7397">npm-rebuild(1) -- Rebuild a package</a> by isucon76 (2013-10-03 22:42:29)
+</li>
+<li>
+  <a href="/memo/7396"># Request -- Simplified HTTP client</a> by isucon76 (2013-10-03 22:42:28)
+</li>
+<li>
+  <a href="/memo/7393">npm-root(3) -- Display npm root</a> by isucon76 (2013-10-03 22:42:25)
+</li>
+<li>
+  <a href="/memo/7389">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon76 (2013-10-03 22:42:21)
+</li>
+<li>
+  <a href="/memo/7388">npm-publish(3) -- Publish a package</a> by isucon76 (2013-10-03 22:42:20)
+</li>
+<li>
+  <a href="/memo/7387">## read</a> by isucon75 (2013-10-03 22:42:19)
+</li>
+<li>
+  <a href="/memo/7386"># combined-stream</a> by isucon75 (2013-10-03 22:42:18)
+</li>
+<li>
+  <a href="/memo/7382">npm-edit(3) -- Edit an installed package</a> by isucon75 (2013-10-03 22:42:14)
+</li>
+<li>
+  <a href="/memo/7381"># lru cache</a> by isucon75 (2013-10-03 22:42:13)
+</li>
+<li>
+  <a href="/memo/7376"># json-stringify-safe</a> by isucon75 (2013-10-03 22:42:08)
+</li>
+<li>
+  <a href="/memo/7373">npm-adduser(1) -- Add a registry user account</a> by isucon75 (2013-10-03 22:42:05)
+</li>
+<li>
+  <a href="/memo/7371">aws-sign</a> by isucon75 (2013-10-03 22:42:03)
+</li>
+<li>
+  <a href="/memo/7368"># combined-stream</a> by isucon75 (2013-10-03 22:42:00)
+</li>
+<li>
+  <a href="/memo/7367">oauth-sign</a> by isucon75 (2013-10-03 22:41:59)
+</li>
+<li>
+  <a href="/memo/7365"></a> by isucon75 (2013-10-03 22:41:57)
+</li>
+<li>
+  <a href="/memo/7364">npm-run-script(3) -- Run arbitrary package scripts</a> by isucon75 (2013-10-03 22:41:56)
+</li>
+<li>
+  <a href="/memo/7363"># npmlog</a> by isucon75 (2013-10-03 22:41:55)
+</li>
+<li>
+  <a href="/memo/7361">npm-faq(7) -- Frequently Asked Questions</a> by isucon75 (2013-10-03 22:41:53)
+</li>
+<li>
+  <a href="/memo/7360"># node-uuid Benchmarks</a> by isucon75 (2013-10-03 22:41:52)
+</li>
+<li>
+  <a href="/memo/7357">npm-edit(1) -- Edit an installed package</a> by isucon75 (2013-10-03 22:41:49)
+</li>
+<li>
+  <a href="/memo/7354">npm-restart(3) -- Start a package</a> by isucon75 (2013-10-03 22:41:46)
+</li>
+<li>
+  <a href="/memo/7353">npm-scripts(7) -- How npm handles the &quot;scripts&quot; field</a> by isucon75 (2013-10-03 22:41:45)
+</li>
+<li>
+  <a href="/memo/7352">npm-config(7) -- More than you probably want to know about npm configuration</a> by isucon75 (2013-10-03 22:41:44)
+</li>
+<li>
+  <a href="/memo/7350">npm-repo(3) -- Open package repository page in the browser</a> by isucon75 (2013-10-03 22:41:42)
+</li>
+<li>
+  <a href="/memo/7349">npm-bin(3) -- Display npm bin folder</a> by isucon75 (2013-10-03 22:41:41)
+</li>
+<li>
+  <a href="/memo/7348">node-asn1 is a library for encoding and decoding ASN.1 datatypes in pure JS.</a> by isucon75 (2013-10-03 22:41:40)
+</li>
+<li>
+  <a href="/memo/7347">cryptiles</a> by isucon75 (2013-10-03 22:41:39)
+</li>
+<li>
+  <a href="/memo/7346"># npm-init</a> by isucon75 (2013-10-03 22:41:38)
+</li>
+<li>
+  <a href="/memo/7345"># json-stringify-safe</a> by isucon75 (2013-10-03 22:41:37)
+</li>
+<li>
+  <a href="/memo/7344"># lockfile</a> by isucon75 (2013-10-03 22:41:36)
+</li>
+<li>
+  <a href="/memo/7340">npm-docs(1) -- Docs for a package in a web browser maybe</a> by isucon75 (2013-10-03 22:41:32)
+</li>
+<li>
+  <a href="/memo/7338">npm-rebuild(1) -- Rebuild a package</a> by isucon75 (2013-10-03 22:41:30)
+</li>
+<li>
+  <a href="/memo/7335">cryptiles</a> by isucon75 (2013-10-03 22:41:27)
+</li>
+<li>
+  <a href="/memo/7334">npm-shrinkwrap(3) -- programmatically generate package shrinkwrap file</a> by isucon75 (2013-10-03 22:41:26)
+</li>
+<li>
+  <a href="/memo/7333">npm-faq(7) -- Frequently Asked Questions</a> by isucon75 (2013-10-03 22:41:25)
+</li>
+<li>
+  <a href="/memo/7332">npm-ls(1) -- List installed packages</a> by isucon75 (2013-10-03 22:41:24)
+</li>
+<li>
+  <a href="/memo/7331"># Glob</a> by isucon75 (2013-10-03 22:41:23)
+</li>
+<li>
+  <a href="/memo/7330"># minimatch</a> by isucon75 (2013-10-03 22:41:22)
+</li>
+<li>
+  <a href="/memo/7329">npm-publish(3) -- Publish a package</a> by isucon75 (2013-10-03 22:41:21)
+</li>
+<li>
+  <a href="/memo/7324">Browser-friendly inheritance fully compatible with standard node.js</a> by isucon75 (2013-10-03 22:41:16)
+</li>
+<li>
+  <a href="/memo/7323">npm-deprecate(1) -- Deprecate a version of a package</a> by isucon75 (2013-10-03 22:41:15)
+</li>
+<li>
+  <a href="/memo/7317">npm-load(3) -- Load config settings</a> by isucon75 (2013-10-03 22:41:09)
+</li>
+<li>
+  <a href="/memo/7316">Use this module to convert a username/groupname to a uid/gid number.</a> by isucon75 (2013-10-03 22:41:08)
+</li>
+<li>
+  <a href="/memo/7312"># node-assert-plus</a> by isucon75 (2013-10-03 22:41:04)
+</li>
+</ul>
+
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

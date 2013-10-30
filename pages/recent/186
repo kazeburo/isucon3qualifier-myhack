@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>Isucon3</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<style>
+body {
+  padding-top: 60px;
+}
+</style>
+<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/">Isucon3</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li><a href="/">Home</a></li>
+<!--# if expr="$isucon_username" -->
+<li><a href="/mypage">MyPage</a></li>
+<li>
+  <form action="/signout" method="post">
+    <input type="hidden" name="sid" value="<!--# echo var="isucon_token" -->">
+    <input type="submit" value="SignOut">
+  </form>
+</li>
+<!--# else -->
+<li><a href="/signin">SignIn</a></li>
+<!--# endif -->
+</ul>
+</div> <!--/.nav-collapse -->
+</div>
+</div>
+</div>
+
+<div class="container">
+<h2>Hello <!--# echo var="isucon_username" default="" -->!</h2>
+
+<h3>public memos</h3>
+<p id="pager">
+  recent 18601 - 18700 / total <span id="total">20540</span>
+</p>
+<ul id="memos">
+<li>
+  <a href="/memo/3895">aws-sign</a> by isucon41 (2013-10-03 21:44:07)
+</li>
+<li>
+  <a href="/memo/3894">npm-submodule(3) -- Add a package as a git submodule</a> by isucon41 (2013-10-03 21:44:06)
+</li>
+<li>
+  <a href="/memo/3893"># fstream-ignore</a> by isucon41 (2013-10-03 21:44:05)
+</li>
+<li>
+  <a href="/memo/3892">npm-run-script(1) -- Run arbitrary package scripts</a> by isucon41 (2013-10-03 21:44:04)
+</li>
+<li>
+  <a href="/memo/3891">tunnel-agent</a> by isucon41 (2013-10-03 21:44:03)
+</li>
+<li>
+  <a href="/memo/3888">npm-root(3) -- Display npm root</a> by isucon41 (2013-10-03 21:44:00)
+</li>
+<li>
+  <a href="/memo/3887">forever-agent</a> by isucon41 (2013-10-03 21:43:59)
+</li>
+<li>
+  <a href="/memo/3886">The &quot;which&quot; util from npm&#39;s guts.</a> by isucon41 (2013-10-03 21:43:58)
+</li>
+<li>
+  <a href="/memo/3885">package.json(5) -- Specifics of npm&#39;s package.json handling</a> by isucon41 (2013-10-03 21:43:57)
+</li>
+<li>
+  <a href="/memo/3883"># read-package-json</a> by isucon41 (2013-10-03 21:43:55)
+</li>
+<li>
+  <a href="/memo/3882">npm-prune(3) -- Remove extraneous packages</a> by isucon40 (2013-10-03 21:43:54)
+</li>
+<li>
+  <a href="/memo/3881">semver(7) -- The semantic versioner for npm</a> by isucon40 (2013-10-03 21:43:53)
+</li>
+<li>
+  <a href="/memo/3879">cryptiles</a> by isucon40 (2013-10-03 21:43:51)
+</li>
+<li>
+  <a href="/memo/3878">npm-registry(7) -- The JavaScript Package Registry</a> by isucon40 (2013-10-03 21:43:50)
+</li>
+<li>
+  <a href="/memo/3875">npm-removal(1) -- Cleaning the Slate</a> by isucon40 (2013-10-03 21:43:47)
+</li>
+<li>
+  <a href="/memo/3873">npm-publish(1) -- Publish a package</a> by isucon40 (2013-10-03 21:43:45)
+</li>
+<li>
+  <a href="/memo/3871"># delayed-stream</a> by isucon40 (2013-10-03 21:43:43)
+</li>
+<li>
+  <a href="/memo/3870"># mime</a> by isucon40 (2013-10-03 21:43:42)
+</li>
+<li>
+  <a href="/memo/3866">npm-restart(3) -- Start a package</a> by isucon40 (2013-10-03 21:43:38)
+</li>
+<li>
+  <a href="/memo/3862"># Glob</a> by isucon40 (2013-10-03 21:43:34)
+</li>
+<li>
+  <a href="/memo/3861"># once</a> by isucon40 (2013-10-03 21:43:33)
+</li>
+<li>
+  <a href="/memo/3858">npm-install(1) -- Install a package</a> by isucon40 (2013-10-03 21:43:30)
+</li>
+<li>
+  <a href="/memo/3857"># promzard</a> by isucon40 (2013-10-03 21:43:29)
+</li>
+<li>
+  <a href="/memo/3856">npm-dedupe(1) -- Reduce duplication</a> by isucon40 (2013-10-03 21:43:28)
+</li>
+<li>
+  <a href="/memo/3855">npm-folders(5) -- Folder Structures Used by npm</a> by isucon40 (2013-10-03 21:43:27)
+</li>
+<li>
+  <a href="/memo/3854">npm-index(7) -- Index of all npm documentation</a> by isucon40 (2013-10-03 21:43:26)
+</li>
+<li>
+  <a href="/memo/3853">npm-prune(1) -- Remove extraneous packages</a> by isucon40 (2013-10-03 21:43:25)
+</li>
+<li>
+  <a href="/memo/3846">![hawk Logo](https://raw.github.com/hueniverse/hawk/master/images/hawk.png)</a> by isucon40 (2013-10-03 21:43:18)
+</li>
+<li>
+  <a href="/memo/3844">npm-deprecate(1) -- Deprecate a version of a package</a> by isucon40 (2013-10-03 21:43:16)
+</li>
+<li>
+  <a href="/memo/3842">npm-install(3) -- install a package programmatically</a> by isucon40 (2013-10-03 21:43:14)
+</li>
+<li>
+  <a href="/memo/3841"># Glob</a> by isucon40 (2013-10-03 21:43:13)
+</li>
+<li>
+  <a href="/memo/3840">securecookie</a> by isucon40 (2013-10-03 21:43:12)
+</li>
+<li>
+  <a href="/memo/3839">npm-config(3) -- Manage the npm configuration files</a> by isucon40 (2013-10-03 21:43:11)
+</li>
+<li>
+  <a href="/memo/3832">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon40 (2013-10-03 21:43:04)
+</li>
+<li>
+  <a href="/memo/3829"># minimatch</a> by isucon40 (2013-10-03 21:43:01)
+</li>
+<li>
+  <a href="/memo/3828">tunnel-agent</a> by isucon40 (2013-10-03 21:43:00)
+</li>
+<li>
+  <a href="/memo/3827">npm-help-search(3) -- Search the help pages</a> by isucon40 (2013-10-03 21:42:59)
+</li>
+<li>
+  <a href="/memo/3826"># mime</a> by isucon40 (2013-10-03 21:42:58)
+</li>
+<li>
+  <a href="/memo/3825">npm-registry(7) -- The JavaScript Package Registry</a> by isucon40 (2013-10-03 21:42:57)
+</li>
+<li>
+  <a href="/memo/3824"># couch-login</a> by isucon40 (2013-10-03 21:42:56)
+</li>
+<li>
+  <a href="/memo/3823">Browser-friendly inheritance fully compatible with standard node.js</a> by isucon40 (2013-10-03 21:42:55)
+</li>
+<li>
+  <a href="/memo/3822">Use this module to convert a username/groupname to a uid/gid number.</a> by isucon40 (2013-10-03 21:42:54)
+</li>
+<li>
+  <a href="/memo/3820">&lt;a href=&quot;https://github.com/spumko&quot;&gt;&lt;img src=&quot;https://raw.github.com/spumko/spumko/master/images/from.png&quot; align=&quot;right&quot; /&gt;&lt;/a&gt;</a> by isucon40 (2013-10-03 21:42:52)
+</li>
+<li>
+  <a href="/memo/3819">npm-bugs(1) -- Bugs for a package in a web browser maybe</a> by isucon40 (2013-10-03 21:42:51)
+</li>
+<li>
+  <a href="/memo/3815">npm-edit(3) -- Edit an installed package</a> by isucon40 (2013-10-03 21:42:47)
+</li>
+<li>
+  <a href="/memo/3813">npm-rebuild(1) -- Rebuild a package</a> by isucon40 (2013-10-03 21:42:45)
+</li>
+<li>
+  <a href="/memo/3812">## Terminal ##</a> by isucon40 (2013-10-03 21:42:44)
+</li>
+<li>
+  <a href="/memo/3810">npm-tag(3) -- Tag a published version</a> by isucon40 (2013-10-03 21:42:42)
+</li>
+<li>
+  <a href="/memo/3809">ansi.js</a> by isucon40 (2013-10-03 21:42:41)
+</li>
+<li>
+  <a href="/memo/3808">![hawk Logo](https://raw.github.com/hueniverse/hawk/master/images/hawk.png)</a> by isucon40 (2013-10-03 21:42:40)
+</li>
+<li>
+  <a href="/memo/3807">Browser-friendly inheritance fully compatible with standard node.js</a> by isucon40 (2013-10-03 21:42:39)
+</li>
+<li>
+  <a href="/memo/3805"># abbrev-js</a> by isucon40 (2013-10-03 21:42:37)
+</li>
+<li>
+  <a href="/memo/3802">The &quot;which&quot; util from npm&#39;s guts.</a> by isucon40 (2013-10-03 21:42:34)
+</li>
+<li>
+  <a href="/memo/3801">cryptiles</a> by isucon40 (2013-10-03 21:42:33)
+</li>
+<li>
+  <a href="/memo/3800"># node-http-signature</a> by isucon40 (2013-10-03 21:42:32)
+</li>
+<li>
+  <a href="/memo/3798">npm-edit(3) -- Edit an installed package</a> by isucon39 (2013-10-03 21:42:30)
+</li>
+<li>
+  <a href="/memo/3797">context</a> by isucon39 (2013-10-03 21:42:29)
+</li>
+<li>
+  <a href="/memo/3796">npm-config(7) -- More than you probably want to know about npm configuration</a> by isucon39 (2013-10-03 21:42:28)
+</li>
+<li>
+  <a href="/memo/3795">npm-edit(3) -- Edit an installed package</a> by isucon39 (2013-10-03 21:42:27)
+</li>
+<li>
+  <a href="/memo/3791">npm-cache(1) -- Manipulates packages cache</a> by isucon39 (2013-10-03 21:42:23)
+</li>
+<li>
+  <a href="/memo/3790"># Glob</a> by isucon39 (2013-10-03 21:42:22)
+</li>
+<li>
+  <a href="/memo/3789">npm-docs(1) -- Docs for a package in a web browser maybe</a> by isucon39 (2013-10-03 21:42:21)
+</li>
+<li>
+  <a href="/memo/3788">npm-deprecate(1) -- Deprecate a version of a package</a> by isucon39 (2013-10-03 21:42:20)
+</li>
+<li>
+  <a href="/memo/3787">npm-shrinkwrap(3) -- programmatically generate package shrinkwrap file</a> by isucon39 (2013-10-03 21:42:19)
+</li>
+<li>
+  <a href="/memo/3786">Like `chown -R`.</a> by isucon39 (2013-10-03 21:42:18)
+</li>
+<li>
+  <a href="/memo/3784">npm-init(1) -- Interactively create a package.json file</a> by isucon39 (2013-10-03 21:42:16)
+</li>
+<li>
+  <a href="/memo/3783">oauth-sign</a> by isucon39 (2013-10-03 21:42:15)
+</li>
+<li>
+  <a href="/memo/3782"></a> by isucon39 (2013-10-03 21:42:14)
+</li>
+<li>
+  <a href="/memo/3781">npm init(3) -- Interactively create a package.json file</a> by isucon39 (2013-10-03 21:42:13)
+</li>
+<li>
+  <a href="/memo/3780"># node-uuid</a> by isucon39 (2013-10-03 21:42:12)
+</li>
+<li>
+  <a href="/memo/3776"># readable-stream</a> by isucon39 (2013-10-03 21:42:08)
+</li>
+<li>
+  <a href="/memo/3775">npm-rm(1) -- Remove a package</a> by isucon39 (2013-10-03 21:42:07)
+</li>
+<li>
+  <a href="/memo/3773">npm-bin(3) -- Display npm bin folder</a> by isucon39 (2013-10-03 21:42:05)
+</li>
+<li>
+  <a href="/memo/3772">npm-publish(3) -- Publish a package</a> by isucon39 (2013-10-03 21:42:04)
+</li>
+<li>
+  <a href="/memo/3769"># node-uuid</a> by isucon39 (2013-10-03 21:42:01)
+</li>
+<li>
+  <a href="/memo/3766">npm-removal(1) -- Cleaning the Slate</a> by isucon39 (2013-10-03 21:41:58)
+</li>
+<li>
+  <a href="/memo/3763"># mime</a> by isucon39 (2013-10-03 21:41:55)
+</li>
+<li>
+  <a href="/memo/3761"># osenv</a> by isucon39 (2013-10-03 21:41:53)
+</li>
+<li>
+  <a href="/memo/3760">package.json(5) -- Specifics of npm&#39;s package.json handling</a> by isucon39 (2013-10-03 21:41:52)
+</li>
+<li>
+  <a href="/memo/3755"># fstream-npm</a> by isucon39 (2013-10-03 21:41:47)
+</li>
+<li>
+  <a href="/memo/3754">npm-docs(3) -- Docs for a package in a web browser maybe</a> by isucon39 (2013-10-03 21:41:46)
+</li>
+<li>
+  <a href="/memo/3753"># once</a> by isucon39 (2013-10-03 21:41:45)
+</li>
+<li>
+  <a href="/memo/3751">[![Build Status](https://travis-ci.org/robertkowalski/npm-user-validate.png?branch=master)](https://travis-ci.org/robertkowalski/npm-user-validate)</a> by isucon39 (2013-10-03 21:41:43)
+</li>
+<li>
+  <a href="/memo/3750"># It Opens Stuff</a> by isucon39 (2013-10-03 21:41:42)
+</li>
+<li>
+  <a href="/memo/3749">npm-bundle(1) -- REMOVED</a> by isucon39 (2013-10-03 21:41:41)
+</li>
+<li>
+  <a href="/memo/3748">A `rm -rf` for node.</a> by isucon39 (2013-10-03 21:41:40)
+</li>
+<li>
+  <a href="/memo/3745">npm-run-script(1) -- Run arbitrary package scripts</a> by isucon39 (2013-10-03 21:41:37)
+</li>
+<li>
+  <a href="/memo/3737">npm-bugs(3) -- Bugs for a package in a web browser maybe</a> by isucon39 (2013-10-03 21:41:29)
+</li>
+<li>
+  <a href="/memo/3735">node-asn1 is a library for encoding and decoding ASN.1 datatypes in pure JS.</a> by isucon39 (2013-10-03 21:41:27)
+</li>
+<li>
+  <a href="/memo/3730">Like FS streams, but with stat on them, and supporting directories and</a> by isucon39 (2013-10-03 21:41:22)
+</li>
+<li>
+  <a href="/memo/3728"># sigmund</a> by isucon39 (2013-10-03 21:41:20)
+</li>
+<li>
+  <a href="/memo/3726">npm-owner(1) -- Manage package owners</a> by isucon39 (2013-10-03 21:41:18)
+</li>
+<li>
+  <a href="/memo/3725"># npm-registry-client</a> by isucon39 (2013-10-03 21:41:17)
+</li>
+<li>
+  <a href="/memo/3724"></a> by isucon39 (2013-10-03 21:41:16)
+</li>
+<li>
+  <a href="/memo/3722"># fstream-ignore</a> by isucon39 (2013-10-03 21:41:14)
+</li>
+<li>
+  <a href="/memo/3721"># mime</a> by isucon39 (2013-10-03 21:41:13)
+</li>
+<li>
+  <a href="/memo/3720">A list of objects, bound by their prototype chain.</a> by isucon39 (2013-10-03 21:41:12)
+</li>
+<li>
+  <a href="/memo/3719">npm-unpublish(1) -- Remove a package from the registry</a> by isucon39 (2013-10-03 21:41:11)
+</li>
+<li>
+  <a href="/memo/3718"># Request -- Simplified HTTP client</a> by isucon39 (2013-10-03 21:41:10)
+</li>
+<li>
+  <a href="/memo/3716">npm-ls(3) -- List installed packages</a> by isucon39 (2013-10-03 21:41:08)
+</li>
+</ul>
+
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

@@ -241,10 +241,11 @@ post '/memo' => [qw(session get_user require_user anti_csrf)] => sub {
         is_private => $c->req->param('is_private') ? 1: 0,
         id => $memo_id,
         user => $c->stash->{user}->{id},
-        username => $c->stash->{user}->{id},
+        username => $c->stash->{user}->{username},
         created_at => sprintf('%04d-%02d-%02d %02d:%02d:%02d',$lt[5]+1900,$lt[4]+1,$lt[3],$lt[2],$lt[1],$lt[0]),
     });
-    my $memos = $self->dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', $c->stash->{user}->{id});
+    my $memos = $self->dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', 
+                                       $c->stash->{user}->{id});
     $self->memcache->set('user_memos_all:' . $c->stash->{user}->{id},
                 [map { $_->{id} + 0 } @$memos]);
     $self->memcache->set('user_memos_public:' . $c->stash->{user}->{id},
@@ -297,13 +298,12 @@ get '/memo/:id' => [qw(session get_user)] => sub {
             $memo->{user},
         );
     }
+
     my ($older, $newer);
-    for my $i ( 0 .. scalar @$memos - 1 ) {
-        if ( $memos->[$i] eq $memo->{id} ) {
-            $older = $memos->[ $i - 1 ] if $i > 0;
-            $newer = $memos->[ $i + 1 ] if $i < @$memos;
-            last;
-        }
+    my $i = firstidx { $_ eq $memo->{id} } @$memos;
+    if ( $i >= 0 ) {
+        $older = $memos->[ $i - 1 ] if $i > 0;
+        $newer = $memos->[ $i + 1 ] if $i < @$memos;
     }
 
     $c->render('memo.tx', {

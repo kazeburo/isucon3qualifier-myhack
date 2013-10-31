@@ -103,7 +103,7 @@ EOF
     my $ela = $end_time - $start_time;
     warn sprintf('elaplsed %s, [%s]', $ela, scalar localtime()) if $ela > 0.6;
 
-    select undef,undef,undef,0.5;
+    select undef,undef,undef,0.8;
 }
 
 

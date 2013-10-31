@@ -10,6 +10,7 @@ use File::Copy;
 use File::Temp;
 use Text::Xslate;
 use Time::HiRes;
+use Cache::Memcached::Fast;
 
 my $root_dir = $FindBin::Bin;
 my $env = $ENV{ISUCON_ENV} || 'local';

@@ -55,5 +55,9 @@ for my $memo (@$memos) {
 my $users = $dbh->select_all('SELECT id FROM users ORDER BY id ASC');
 for my $user (@$users) {
     my $memos = $dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', $user->{id});
-    $cache->set('user_memos:' . $user->{id}, [map {[$_->{id},$_->{is_private}]} @$memos]);
+    $cache->set('user_memos_all:' . $user->{id},
+                [map { $_->{id} + 0 } @$memos]);
+    $cache->set('user_memos_public:' . $user->{id},
+                [map { $_->{id} + 0 } grep { !$_->{is_private} } @$memos]);
 }
+

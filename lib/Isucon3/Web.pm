@@ -245,7 +245,10 @@ post '/memo' => [qw(session get_user require_user anti_csrf)] => sub {
         created_at => sprintf('%04d-%02d-%02d %02d:%02d:%02d',$lt[5]+1900,$lt[4]+1,$lt[3],$lt[2],$lt[1],$lt[0]),
     });
     my $memos = $self->dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', $c->stash->{user}->{id});
-    $self->memcache->set('user_memos:' . $c->stash->{user}->{id}, [map {[$_->{id},$_->{is_private}]} @$memos]);
+    $self->memcache->set('user_memos_all:' . $c->stash->{user}->{id},
+                [map { $_->{id} + 0 } @$memos]);
+    $self->cache->set('user_memos_public:' . $c->stash->{user}->{id},
+                [map { $_->{id} + 0 } grep { !$_->{is_private} } @$memos]);
     
     $c->redirect('/memo/' . $memo_id);
 };
@@ -274,51 +277,33 @@ get '/memo/:id' => [qw(session get_user)] => sub {
         }
     }
 
-    my ($newer, $older);
-    my $memos = $self->memcache->get('user_memos:' . $memo->{user});
-    if ( $memos ) {
-        my $i = firstidx { $_->[0] == $memo->{id}  } @$memos;
-        # privateのものもOKなので前後のid
-        if ($user && $user->{id} == $memo->{user}) {
-           $older = $memos->[ $i - 1 ][0] if $i > 0;
-           $newer = $memos->[ $i + 1 ][0] if $i < @$memos;
+    my $memos;
+    my $cond;
+    my $force_index = "FORCE INDEX (memos_mypage)";
+    if ($user && $user->{id} == $memo->{user}) {
+        $memos = $self->memcache->get('user_memos_all:' . $memo->{user});
+        $cond = "";
+    }
+    else {
+        $memos = $self->memcache->get('user_memos_public:' . $memo->{user});
+        $cond = "AND is_private=0";
+        $force_index = "FORCE INDEX (pager)";
+    }
+   
+    if ( !$memos || @$memos == 0 ) {
+        $memos = $self->dbh->selectall_arrayref(
+            "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
+            { [0] },
+            $memo->{user},
+        );
+    }
+    my ($older, $newer);
+    for my $i ( 0 .. scalar @$memos - 1 ) {
+        if ( $memos->[$i] eq $memo->{id} ) {
+            $older = $memos->[ $i - 1 ] if $i > 0;
+            $newer = $memos->[ $i + 1 ] if $i < @$memos;
+            last;
         }
-        # privateのものは除外する必要ある
-        else {
-           for (my $j = $i - 1; $j >= 0; $j--) {
-               if ($memos->[$j][1] == 0) {
-                   $older = $memos->[$j][0];
-               last;
-               }
-           }
-           for (my $j = $i + 1; $j < @$memos; $j++) {
-               if ($memos->[$j][1] == 0) {
-                   $newer = $memos->[$j][0];
-                   last;
-               }
-           }
-        }
-    } else {
-        my $cond;
-        my $force_index = "FORCE INDEX (memos_mypage)";
-        if ($user && $user->{id} == $memo->{user}) {
-            $cond = "";
-        }
-        else {
-           $cond = "AND is_private=0";
-           $force_index = "FORCE INDEX (pager)"
-       }
-       my $memos = $self->dbh->select_all(
-           "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
-           $memo->{user},
-       );
-       for my $i ( 0 .. scalar @$memos - 1 ) {
-           if ( $memos->[$i]->{id} eq $memo->{id} ) {
-               $older = $memos->[ $i - 1 ]->{id} if $i > 0;
-               $newer = $memos->[ $i + 1 ]->{id} if $i < @$memos;
-               last;
-           }
-       }
     }
 
     $c->render('memo.tx', {

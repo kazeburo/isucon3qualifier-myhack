@@ -291,11 +291,11 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     }
    
     if ( !$memos || @$memos == 0 ) {
-        $memos = $self->dbh->selectall_arrayref(
+        my $user_memos = $self->dbh->select_all(
             "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
-            { Slice => [0] },
             $memo->{user},
         );
+        $memos = [map {$_->{id}} @user_memos];
     }
 
     my ($older, $newer);

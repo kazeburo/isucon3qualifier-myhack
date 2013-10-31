@@ -61,3 +61,5 @@ for my $user (@$users) {
                 [map { $_->{id} + 0 } grep { !$_->{is_private} } @$memos]);
 }
 
+$cache->set('max_id', 0);
+

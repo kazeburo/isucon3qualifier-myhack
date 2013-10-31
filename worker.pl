@@ -28,6 +28,12 @@ my $dbh = DBIx::Sunny->connect(
         mysql_auto_reconnect => 1,
     },
 );
+
+my $cache = Cache::Memcached::Fast->new({
+    servers => [ { address => "localhost:12345",noreply=>0} ],
+    serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
+});
+
 my $tx = Text::Xslate->new(
     path => $root_dir . '/views_static',
     cache_dir => File::Temp::tempdir( CLEANUP => 1 ),
@@ -46,20 +52,29 @@ my $tx = Text::Xslate->new(
     close $fh;
     move($tmpfilename, $filename);
 }
-
+my @memos_cache;
 while(1){
     my $start_time = Time::HiRes::time();
     eval{
-        my $memos = $dbh->select_all(<<EOF);
+        my $max_id = $cache->get('max_id') || 0;
+        @memos_cache = () if $max_id == 0;
+
+        my $new_memos = $dbh->select_all(<<EOF, $max_id);
             SELECT memos.id AS id,user, title, is_private, created_at, updated_at, username AS username
             FROM memos FORCE INDEX (PRIMARY)
             INNER JOIN users ON memos.user = users.id
-            WHERE is_private=0
+            WHERE is_private=0 AND id > ?
             ORDER BY id DESC
 EOF
-        my $total = scalar @$memos;
+
+        unshift @memos_cache, @$new_memos;
+        my @memos_all = @memos_cache; #copy
+
+        $cache->set('max_id', $memos_all[0]->{id}) if @memos_all;
+        
+        my $total = scalar @memos_all;
         my $page=0;
-        while ( my @memos = splice(@$memos,0,100) ) {
+        while ( my @memos = splice(@memos_all,0,100) ) {
             my $html = $tx->render('index.tx', {
                 memos => \@memos,
                 page  => $page,
@@ -85,7 +100,7 @@ EOF
     my $ela = $end_time - $start_time;
     warn sprintf('elaplsed %s, [%s]', $ela, scalar localtime()) if $ela > 0.6;
 
-    select undef,undef,undef,0.2;
+    select undef,undef,undef,0.3;
 }
 
 

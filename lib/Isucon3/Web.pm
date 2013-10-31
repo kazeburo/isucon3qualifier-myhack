@@ -17,7 +17,6 @@ use Text::Markdown::Hoedown;
 use Data::MessagePack;
 use List::MoreUtils qw/firstidx/;
 
-
 sub load_config {
     my $self = shift;
     $self->{_config} ||= do {

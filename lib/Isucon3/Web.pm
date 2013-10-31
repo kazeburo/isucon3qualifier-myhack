@@ -247,7 +247,7 @@ post '/memo' => [qw(session get_user require_user anti_csrf)] => sub {
     my $memos = $self->dbh->select_all('SELECT id, is_private FROM memos WHERE user = ? ORDER BY id', $c->stash->{user}->{id});
     $self->memcache->set('user_memos_all:' . $c->stash->{user}->{id},
                 [map { $_->{id} + 0 } @$memos]);
-    $self->cache->set('user_memos_public:' . $c->stash->{user}->{id},
+    $self->memcache->set('user_memos_public:' . $c->stash->{user}->{id},
                 [map { $_->{id} + 0 } grep { !$_->{is_private} } @$memos]);
     
     $c->redirect('/memo/' . $memo_id);

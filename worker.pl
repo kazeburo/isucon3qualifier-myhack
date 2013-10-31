@@ -68,7 +68,7 @@ while(1){
             ORDER BY id DESC
 EOF
 
-        unshift @memos_cache, @$new_memos;
+        @memos_cache =  (@$new_memos, @memos_cache);
         my @memos_all = @memos_cache; #copy
 
         $cache->set('max_id', $memos_all[0]->{id}) if @memos_all;

@@ -293,7 +293,7 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     if ( !$memos || @$memos == 0 ) {
         $memos = $self->dbh->selectall_arrayref(
             "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
-            { [0] },
+            { Slice => [0] },
             $memo->{user},
         );
     }

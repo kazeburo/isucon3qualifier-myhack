@@ -295,7 +295,7 @@ get '/memo/:id' => [qw(session get_user)] => sub {
             "SELECT id FROM memos $force_index WHERE user=? $cond ORDER BY id",
             $memo->{user},
         );
-        $memos = [map {$_->{id}} @user_memos];
+        $memos = [map {$_->{id}} $user_memos];
     }
 
     my ($older, $newer);

@@ -64,7 +64,7 @@ while(1){
             SELECT memos.id AS id,user, title, is_private, created_at, updated_at, username AS username
             FROM memos FORCE INDEX (PRIMARY)
             INNER JOIN users ON memos.user = users.id
-            WHERE is_private=0 AND id > ?
+            WHERE is_private=0 AND memos.id > ?
             ORDER BY id DESC
 EOF
 

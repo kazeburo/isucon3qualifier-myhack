@@ -65,5 +65,4 @@ for my $user (@$users) {
 }
 
 $cache->set('max_id', '0');
-
 $cache->set('stop_worker', '0');

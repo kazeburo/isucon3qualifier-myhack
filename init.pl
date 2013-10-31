@@ -36,6 +36,9 @@ my $cache = Cache::Memcached::Fast->new({
     serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
 });
 
+$cache->set('stop_worker', '1');
+sleep 2;
+
 my $memos = $dbh->select_all(<<EOF);
     SELECT memos.id AS id,user, title, content, is_private, created_at, updated_at, username AS username
         FROM memos FORCE INDEX (PRIMARY)
@@ -61,5 +64,6 @@ for my $user (@$users) {
                 [map { $_->{id} + 0 } grep { !$_->{is_private} } @$memos]);
 }
 
-$cache->set('max_id', 0);
+$cache->set('max_id', '0');
 
+$cache->set('stop_worker', '0');

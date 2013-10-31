@@ -57,6 +57,7 @@ my @memos_cache;
 while(1){
     my $start_time = Time::HiRes::time();
     eval{
+        $cache->get('stop_worker') and next;
         my $max_id = $cache->get('max_id') || 0;
         @memos_cache = () if $max_id == 0;
 
@@ -70,8 +71,9 @@ EOF
 
         @memos_cache =  (@$new_memos, @memos_cache);
         my @memos_all = @memos_cache; #copy
+warn sprintf 'max_id:%s new_max_id:%stotal:%s', $max_id, $memos_all[0]->{id}, scalar @memos_all;
 
-        $cache->set('max_id', $memos_all[0]->{id}) if @memos_all;
+        $cache->set('max_id', $memos_all[0]->{id}) if @$new_memos;
         
         my $total = scalar @memos_all;
         my $page=0;

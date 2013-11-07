@@ -1,5 +1,3 @@
-: cascade base
-: around content -> {
 
 <h3>public memos</h3>
 <p id="pager">
@@ -13,5 +11,4 @@
 : }
 </ul>
 
-: }
 

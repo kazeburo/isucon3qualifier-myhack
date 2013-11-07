@@ -312,4 +312,8 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     });
 };
 
+get '/hello' => sub {
+    "OK";
+};
+
 1;

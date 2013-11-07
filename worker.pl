@@ -45,13 +45,7 @@ my $tx = Text::Xslate->new(
 {
     my $html = $tx->render('signin.tx', {
     });
-    my $filename = $root_dir . '/pages/signin';
-    my $tmpfilename = $filename .'.'. int(rand(100));
-    mkdir "$root_dir/pages";
-    open my $fh , '>', $tmpfilename;
-    print $fh $html;
-    close $fh;
-    move($tmpfilename, $filename);
+    $cache->set('page:/signin',$html);
 }
 my @memos_cache;
 while(1){
@@ -83,17 +77,9 @@ EOF
                 page  => $page,
                 total => $total,
             });
-            my $filename = $root_dir . '/pages/recent/'.$page;
-            my $tmpfilename = $filename .'.'. int(rand(100));
-            mkdir "$root_dir/pages";
-            mkdir "$root_dir/pages/recent";
-            open my $fh , '>', $tmpfilename;
-            print $fh $html;
-            close $fh;
-            move($tmpfilename, $filename);
+            $cache->set('page:/recent/'.$page,$html);
             if ( $page == 0 ) {
-                copy($filename,"$root_dir/pages/index.html.b");
-                move("$root_dir/pages/index.html.b","$root_dir/pages/index.html");
+                $cache->set('page:/',$html);
             }
             $page++;
         }
@@ -103,7 +89,7 @@ EOF
     my $ela = $end_time - $start_time;
     warn sprintf('elaplsed %s, [%s]', $ela, scalar localtime()) if $ela > 0.6;
 
-    select undef,undef,undef,0.8;
+    select undef,undef,undef,0.85;
 }
 
 

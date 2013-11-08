@@ -5,7 +5,7 @@ use warnings;
 use utf8;
 use Kossy;
 use DBIx::Sunny;
-use JSON qw/ decode_json /;
+use JSON qw/ encode_json decode_json /;
 use Digest::SHA qw/ sha256_hex sha1_hex /;
 use DBIx::Sunny;
 use File::Temp qw/ tempfile /;
@@ -33,7 +33,7 @@ sub memcache {
     $self->{_memd} ||= do {
         Cache::Memcached::Fast->new({
             servers => [ { address => "localhost:12345",noreply=>1} ],
-            serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
+    serialize_methods => [ sub { encode_json(+shift)}, sub {decode_json(+shift)} ],
         });
     };
 }

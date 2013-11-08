@@ -44,15 +44,13 @@ local memcached = require "resty.memcached"
 local memc, err = memcached:new{ key_transform = { identity, identity }}
 if not memc then
    ngx.log(ngx.ERR,"failed to instantiate memc: ", err)
-   ngx.status = ngx.HTTP_INTERNAL_SERVER_ERROR
-   return
+   ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 memc:set_timeout(1000) -- 1 sec
 local ok, err = memc:connect("127.0.0.1", 12345)
 if not ok then
    ngx.log(ngx.ERR, "failed to connect: ", err)
-   ngx.status = ngx.HTTP_INTERNAL_SERVER_ERROR
-   return
+   ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
 end
 
 local content, flags, err = memc:get("page:"..ngx.var.uri)
@@ -61,14 +59,12 @@ memc:set_keepalive(1000, 100)
 local isucon_token = ngx.var.isucon_token
 local isucon_username = ngx.var.isucon_username
 
-ngx.say(base1);
 -- ngx.log(ngx.ERR, isucon_username,'==',string.len(isucon_username));
 if string.len(isucon_username) > 0 then
-   ngx.say('<li><a href="/mypage">MyPage</a></li><li><form action="/signout" method="post"><input type="hidden" name="sid" value="', isucon_token, '"><input type="submit" value="SignOut"></form></li>')
+   ngx.say(base1..'<li><a href="/mypage">MyPage</a></li><li><form action="/signout" method="post"><input type="hidden" name="sid" value="'..isucon_token..'"><input type="submit" value="SignOut"></form></li></ul></div> <!--/.nav-collapse --></div></div></div><div class="container"><h2>Hello '..isucon_username..'!</h2>'..content..base2)
 else 
-    ngx.say('<li><a href="/signin">SignIn</a></li>');
+    ngx.say(base1..'<li><a href="/signin">SignIn</a></li></ul></div> <!--/.nav-collapse --></div></div></div><div class="container"><h2>Hello !</h2>'..content..base2);
 end
 
-ngx.say('</ul></div> <!--/.nav-collapse --></div></div></div><div class="container"><h2>Hello ',isucon_username,'!</h2>',content,base2)
 
 

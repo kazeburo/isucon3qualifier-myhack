@@ -1,4 +1,4 @@
-requires "Kossy", 0.23;
+requires "Kossy", 0.25;
 requires "DBIx::Sunny";
 requires "JSON::XS";
 requires "Digest::SHA";
@@ -22,3 +22,5 @@ requires "Plack::Middleware::Session::Simple";
 requires "Proclet";
 requires "Text::Markdown::Hoedown";
 requires "Devel::NYTProf";
+
+

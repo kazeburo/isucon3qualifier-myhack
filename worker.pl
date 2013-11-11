@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 use DBIx::Sunny;
-use JSON qw/ decode_json /;
+use JSON qw/ decode_json encode_json/;
 use FindBin;
 use File::Copy;
 use File::Temp;
@@ -32,7 +32,7 @@ my $dbh = DBIx::Sunny->connect(
 
 my $cache = Cache::Memcached::Fast->new({
     servers => [ { address => "localhost:12345",noreply=>0} ],
-    serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
+    serialize_methods => [ sub { encode_json(+shift)}, sub {decode_json(+shift)} ],
 });
 
 my $tx = Text::Xslate->new(

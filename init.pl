@@ -12,6 +12,7 @@ use Text::Xslate;
 use Time::HiRes;
 use Text::Markdown::Hoedown;
 use Cache::Memcached::Fast;
+use JSON;
 
 my $root_dir = $FindBin::Bin;
 my $env = $ENV{ISUCON_ENV} || 'local';
@@ -33,7 +34,7 @@ my $dbh = DBIx::Sunny->connect(
 
 my $cache = Cache::Memcached::Fast->new({
     servers => [ { address => "localhost:12345",noreply=>0} ],
-    serialize_methods => [ sub { Data::MessagePack->pack(+shift)}, sub {Data::MessagePack->unpack(+shift)} ],
+    serialize_methods => [ sub { encode_json(+shift)}, sub {decode_json(+shift)} ],
 });
 
 $cache->set('stop_worker', '1');

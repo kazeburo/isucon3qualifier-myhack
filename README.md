@@ -29,17 +29,17 @@
 
 ## carton setup
 
-    cd /home/isucon/webapp/perl/conf
+    cd /home/isucon/webapp/perl
     carton install
 
 ## luajit
 
-    cd /home/isucon/webapp/perl/conf
+    cd /home/isucon/webapp/perl
     /usr/local/openresty/luajit/bin/luajit -b memo.lua memo.luac
 
 ## supervisord.conf
 
-    cd /home/isucon/webapp/perl/conf
+    cd /home/isucon/webapp/perl
     sudo cp conf/supervisord.conf /etc/supervisord.conf
     sudo /usr/bin/supervisorctl reload
 
